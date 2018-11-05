@@ -1,5 +1,7 @@
-# coding-resources
+# Coding-Resources
+
+A website for Programmers to use/add 
+
+ranging from Beginners to Advanced!
 
 
-
-testing testing
