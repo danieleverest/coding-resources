@@ -1,0 +1,27 @@
+{
+  "name": "code-ref",
+  "version": "1.0.0",
+  "description": "This project was created to create a website to help individuals programmers, ranging from novice to advanced, to have a reference site, where specific links, githubs, articles, etc. are listed and recommended by programmers such as yourself!",
+  "main": "app.js",
+  "scripts": {
+    "install:all": "npm install && npm run install:client && npm run install:server",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "client": "npm start --prefix client",
+    "server": "npm run server --prefix server",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rejam/coding-resources.git"
+  },
+  "author": "Ryan James",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Rejam/coding-resources/issues"
+  },
+  "homepage": "https://github.com/Rejam/coding-resources#readme",
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}
