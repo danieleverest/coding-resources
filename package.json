@@ -33,7 +33,8 @@
     "client": "webpack-dev-server --mode development --open",
     "server": "cd server && nodemon server.js",
     "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "npm start"
   },
   "repository": {
     "type": "git",
