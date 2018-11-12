@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Header.scss';
+
 const header = () => (
   <header className="AppBar">
     <nav className="AppBar_Nav">
