@@ -1,19 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "- express\r - mongoose",
-  "main": "server.js",
+  "description": "Server for Coding Resources.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "server": "nodemon server.js"
+    "start": "node index.js"
   },
-  "author": "Ryan James",
-  "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.9"
   },
-  "devDependencies": {
-    "nodemon": "^1.18.6"
-  }
+  "author": "DevLee, Rejam, WarrenH, Adrian",
+  "license": "ISC"
 }

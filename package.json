@@ -1,27 +1,50 @@
 {
-  "name": "code-ref",
+  "name": "coding-resources",
   "version": "1.0.0",
-  "description": "This project was created to create a website to help individuals programmers, ranging from novice to advanced, to have a reference site, where specific links, githubs, articles, etc. are listed and recommended by programmers such as yourself!",
-  "main": "app.js",
+  "description": "Resources for all programming languages in one place.",
+  "main": "webpack.config.js",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.4",
+    "nodemon": "^1.18.6",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.23.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.4.0",
+    "axios": "^0.18.0",
+    "concurrently": "^4.0.1",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  },
   "scripts": {
-    "install:all": "npm install && npm run install:client && npm run install:server",
-    "install:client": "cd client && npm install",
-    "install:server": "cd server && npm install",
-    "client": "npm start --prefix client",
-    "server": "npm run server --prefix server",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "client": "webpack-dev-server --mode development --open",
+    "server": "cd server && nodemon server.js",
+    "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
+    "build": "webpack --mode production",
+    "test": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rejam/coding-resources.git"
   },
-  "author": "Ryan James",
-  "license": "MIT",
+  "author": "DevLee, Rejam, WarrenH, Adrian",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Rejam/coding-resources/issues"
   },
-  "homepage": "https://github.com/Rejam/coding-resources#readme",
-  "devDependencies": {
-    "concurrently": "^4.0.1"
-  }
+  "homepage": "https://github.com/Rejam/coding-resources#readme"
 }
