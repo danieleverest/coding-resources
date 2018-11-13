@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 const User = require('../db/models/users');
 
 // /auth/signup
@@ -15,3 +16,5 @@ router.post('/signup', async (req, res) => {
     res.status(400).json(error);
   }
 });
+
+module.exports = router;
