@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Resources = new Schema({
-  resourceName: { type: String },
-  resource_id: { type: String },
+  resourceName: { type: String, required: true },
   submittedBy: { type: String },
   comments: { type: Array },
   tags: { type: Array },

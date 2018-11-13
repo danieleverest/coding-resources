@@ -4,12 +4,9 @@ const Resources = require('../db/models/resources');
 
 router.post('/', async (req, res) => {
   try {
-    const { resourceName, comments } = req.body;
+    const { resourceName } = req.body;
 
-    const resource = new Resources({
-      resourceName,
-      comments,
-    });
+    const resource = new Resources({ resourceName });
 
     const newResource = await resource.save();
 
@@ -41,7 +38,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const resource = await Resources.findByIdAndUpdate(req.params.id, { password: 123 });
+    const resource = await Resources.findByIdAndUpdate(req.params.id);
 
     res.json(resource || 'Resource not found');
   } catch (error) {
