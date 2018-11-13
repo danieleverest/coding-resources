@@ -1,0 +1,26 @@
+.LinkPage {
+  margin-top: 1rem;
+}
+
+.linkContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  grid-gap: 1rem;
+}
+
+.linksLink {
+  font-size:150%;
+  text-transform: uppercase;
+  color: rgb(10, 10, 58);
+}
+
+.linksLink:hover {
+  color: rgb(81, 81, 204);
+}
+
+
+.tag {
+  margin-right: 2rem;
+  padding: 2rem;
+}
