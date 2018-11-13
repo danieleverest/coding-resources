@@ -1,23 +1,13 @@
 const mongoose = require('mongoose');
 
-const {
-  database: { USER, PASS, ADDRESS, PORT }
-} = require('./constants');
-
-mongoose.Promise = global.Promise;
-
-const DB = `mongodb://${USER}:${PASS}${ADDRESS}`;
-
-mongoose
-  .connect(
-    DB,
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log('Database Connected!'))
-  .catch(() =>
-    console.log('Unable to connect to database. Please check credentials')
-  );
+const config = require('./config');
 
 const app = require('./app');
 
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+mongoose.Promise = Promise;
+
+mongoose.connect(config.db, { useNewUrlParser: true })
+  .then(() => console.log('Database Connected!'))
+  .catch(() => console.log('Unable to connect to database. Please check credentials'));
+
+app.listen(config.port, () => console.log(`Server is listening on port ${config.port}`));
