@@ -1,11 +1,3 @@
-const router = require('express').Router();
+const users = require('./users');
 
-const api = require('./api');
-
-module.exports = () => {
-  api(router);
-
-  router.get('/*');
-
-  return router;
-};
+module.exports.users = users;
