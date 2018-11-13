@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './TestStatefullComponet.scss';
+
 class Test extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ class Test extends React.Component {
   render() {
     const { text } = this.state;
 
-    return <h1>{text}</h1>;
+    return <h1 className="marginTop">{text}</h1>;
   }
 }
 

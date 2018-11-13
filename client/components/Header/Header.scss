@@ -1,0 +1,46 @@
+.AppBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: #C70039;
+  }
+
+  .AppBar_logo a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+
+  .AppBar_Nav {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .AppBar_select ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  .AppBar_select li {
+    padding: 0 0.5rem;
+  }
+
+  .AppBar_select a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .AppBar_select a:hover,
+  .AppBar_select a:active {
+    color: #060606
+  }
