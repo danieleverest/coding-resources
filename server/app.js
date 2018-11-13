@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const { users, resources } = require('./routes');
+const { users, resources, auth } = require('./routes');
 
 const app = express();
 
@@ -21,5 +21,6 @@ app.use(morgan('dev'));
 
 app.use('/users', users);
 app.use('/resources', resources);
+app.use('/auth', auth);
 
 module.exports = app;
