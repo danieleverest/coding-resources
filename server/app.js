@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use('/users', users);
+app.use('/auth', auth);
 app.use('/resources', resources);
 app.use('/auth', auth);
 
