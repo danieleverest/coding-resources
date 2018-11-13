@@ -1,4 +1,4 @@
-const User = require('../../db/models/user');
+const User = require('../../db/models/users');
 
 module.exports = (router) => {
   router.get('/', (req, res) => {
