@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const morgan = require('morgan')
+const morgan = require('morgan');
 
-// Import routes
-const users = require('./routes/users');
+const routes = require('./routes');
 
 const app = express();
 
@@ -20,6 +19,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-app.use('/users', users);
+app.use('/', routes());
 
 module.exports = app;
