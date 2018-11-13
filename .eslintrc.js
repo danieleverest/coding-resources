@@ -5,6 +5,7 @@ module.exports = {
     "node": true,
   },
   "rules": {
+    "object-curly-newline": ["error", { "multiline": true, "minProperties": 5 }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "max-len": [
       0
