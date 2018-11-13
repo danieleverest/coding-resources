@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const Links = new Schema({
-  link: { type: String, required: true },
+const Resources = new Schema({
+  resourceName: { type: String },
+  resource_id: { type: String },
   submittedBy: { type: String },
   comments: { type: Array },
   tags: { type: Array },
 });
 
-module.exports = mongoose.model('links', Links);
+module.exports = mongoose.model('resources', Resources);
