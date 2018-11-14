@@ -1,10 +1,14 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+
+import { Button } from '@material-ui/core';
+
 import './Links.scss';
 
 const link = (props) => {
+
   const { url, title, tags, votes } = props;
+
   return (
     <div className="LinkPage">
       <div className="linkContainer">
