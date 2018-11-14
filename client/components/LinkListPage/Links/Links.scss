@@ -5,7 +5,7 @@
 .linkContainer {
   width: 100%;
   display: grid;
-  grid-template-columns: 40% 1fr;
+  grid-template-columns: 40% 1fr 5% 5%;
   grid-gap: 1rem;
 }
 
@@ -19,8 +19,11 @@
   color: rgb(81, 81, 204);
 }
 
-
 .tag {
   margin-right: 2rem;
   padding: 2rem;
+}
+
+.linkVotes {
+  margin-right: 4rem;
 }
