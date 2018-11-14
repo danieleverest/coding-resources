@@ -1,18 +1,53 @@
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
+const User = require('../db/models/users');
+const { secret } = require('../config');
 
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: 'https://rejam.eu.auth0.com/.well-known/jwks.json',
-  }),
+// passport middleware to validate token
+passport.use(new JWTstrategy({
+  secretOrKey: secret,
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+}, async (token, done) => {
+  try {
+    return done(null, token.user);
+  } catch (error) {
+    return done(error);
+  }
+}));
 
-  // Validate the audience and the issuer.
-  audience: 'nJjmZn9DX1N1Q4zOete94a7ek7SfQizO',
-  issuer: 'https://rejam.eu.auth0.com/',
-  algorithms: ['RS256'],
-});
+// passport middleware for registration
+passport.use('signup', new LocalStrategy({
+  username: 'username',
+  password: 'password',
+}, async (username, password, done) => {
+  try {
+    const user = await User.create({ username, password });
+    return done(null, user);
+  } catch (error) {
+    return done(error);
+  }
+}));
 
-module.exports = checkJwt;
+// passport middleware for login
+passport.use('login', new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'password',
+}, async (username, password, done) => {
+  try {
+    const user = await User.findOne({ username });
+    if (!user) {
+      return done(null, false, { message: 'User not found' });
+    }
+
+    const validate = await user.isValidPassword(password);
+    if (!validate) {
+      return done(null, false, { message: 'Wrong password' });
+    }
+
+    return done(null, user, { message: 'Logged in successfully' });
+  } catch (error) {
+    return done(error);
+  }
+}));

@@ -1,4 +1,5 @@
 const express = require('express');
+require('./auth/auth');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -9,8 +10,6 @@ app.use(bodyParser.json());
 app.use(morgan('combined'));
 app.use(helmet());
 app.use(cors());
-
-require('./auth/auth');
 
 const { users, resources, auth } = require('./routes');
 

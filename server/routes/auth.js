@@ -1,23 +1,34 @@
-const argon2 = require('argon2');
 const router = require('express').Router();
-const Users = require('../db/models/users');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const { secret } = require('../config');
 
 // /auth/signup
-router.post('/signup', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    if (password.length < 6) res.json({ password: 'Password must be 6 or more characters' });
-
-    const hash = await argon2.hash(password)
-    const user = new Users({
-      username,
-      password: hash,
-    });
-    const newUser = await user.save();
-    res.status(200).json(newUser);
-  } catch (error) {
-    res.status(400).json(error);
-  }
+router.post('/signup', passport.authenticate('signup', { session: false }), async (req, res) => {
+  res.json({
+    message: 'Signup successful',
+    user: req.user,
+  });
 });
+
+router.post('/login', async (req, res, next) => {
+  passport.authenticate('login', async (err, user, info) => {
+    try {
+      if (err || !user) {
+        return next(err)
+      }
+
+      req.login(user, { session: false }, async (error) => {
+        if (error) return next(error);
+        const body = { _id: user._id, username: user.username };
+        const token = jwt.sign({ user: body }, secret);
+        return res.json({ token });
+      });
+    } catch (error) {
+      return next(error);
+    }
+  })(req, res, next);
+});
+
 
 module.exports = router;
