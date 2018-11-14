@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+const checkJwt = require('../auth/auth');
 const Users = require('../db/models/users');
 
 // Backend only
@@ -33,7 +33,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete user
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', checkJwt, async (req, res) => {
   try {
     const deletedUser = await Users.findByIdAndDelete(req.params.id);
     res.json(deletedUser ? `deleted ${deletedUser.username}` : 'User not found');

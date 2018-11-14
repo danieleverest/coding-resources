@@ -1,27 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
-const { users, resources, auth } = require('./routes');
+const helmet = require('helmet');
+const cors = require('cors');
 
 const app = express();
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-
-  next();
-});
-
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+app.use(morgan('combined'));
+app.use(helmet());
+app.use(cors());
+
+require('./auth/auth');
+
+const { users, resources, auth } = require('./routes');
 
 app.use('/users', users);
 app.use('/auth', auth);
 app.use('/resources', resources);
-app.use('/auth', auth);
 
 module.exports = app;
