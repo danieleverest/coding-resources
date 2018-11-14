@@ -1,10 +1,13 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+
+import { Button } from '@material-ui/core';
+
 import './Links.scss';
 
 const link = (props) => {
   const { url, title, tags } = props;
+
   return (
     <div className="LinkPage">
       <div className="linkContainer">
@@ -20,9 +23,9 @@ const link = (props) => {
 };
 
 link.propTypes = {
-  url: PropTypes.string,
-  title: PropTypes.string,
-  tags: PropTypes.string,
+  url: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  tags: PropTypes.isRequired,
 };
 
 export default link;
