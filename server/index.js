@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
-const http = require('http');
 
-mongoose.Promise = global.Promise;
-
-mongoose.connect('mongodb://localhost:27017/coding_resources', { useNewUrlParser: true }).then(() => console.log('Database Connected!'));
+const config = require('./config');
 
 const app = require('./app');
 
-const PORT = process.env.PORT || 5000;
+mongoose.Promise = Promise;
+mongoose.set('useCreateIndex', true);
+mongoose.set('useNewUrlParser', true);
 
-const server = http.createServer(app);
+mongoose
+  .connect(config.db)
+  .then(() => console.log('Database Connected!'))
+  .catch(() => console.log('Unable to connect to database. Please check credentials'));
 
-server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
+app.listen(config.port, () => console.log(`Server is listening on port ${config.port}`));
