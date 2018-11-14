@@ -1,15 +1,33 @@
 import React from 'react';
-
-import { Header, Footer, TestStatefullComponent, LinkListPage } from './components';
+import Menu from './components/Menu/Menu';
+import { 
+  Footer,
+  TestStatefullComponent, 
+  LinkListPage } 
+from './components';
 import './App.scss';
 
-const app = () => (
-  <div className="app">
-    <Header />
-    <TestStatefullComponent />
-    <LinkListPage />
-    <Footer />
-  </div>
-);
 
-export default app;
+export class Main extends React.Component {
+  render() {
+    return(
+      <div classname="App">
+        <Menu/>
+        {/* <TestStatefullComponent/>
+        <LinkListPage/> */}
+      </div>
+    )
+  }
+};
+
+export default Main;
+
+// const app = () => (
+//   <div className="app">
+//     <Header />
+//     <SideBar />
+//     <TestStatefullComponent />
+//     <LinkListPage />
+//     <Footer />
+//   </div>
+// );
