@@ -13,8 +13,8 @@ export class Main extends React.Component {
     return(
       <div classname="App">
         <Menu/>
-        <TestStatefullComponent/>
-        <LinkListPage/>
+        {/* <TestStatefullComponent/>
+        <LinkListPage/> */}
       </div>
     )
   }
