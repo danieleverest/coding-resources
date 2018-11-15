@@ -1,33 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
-import MenuIcon from '@material-ui/icons/Menu';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import Button from '@material-ui/core/Button';
-import {Face, Add} from '@material-ui/icons';
 
-
-// possibly add a logo
+import {
+  Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemIcon, ListItemText,
+} from '@material-ui/core';
+import { Face, Add, Menu } from '@material-ui/icons';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
+  root: { display: 'flex' },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
@@ -36,51 +20,45 @@ const styles = theme => ({
   },
   appBar: {
     marginLeft: drawerWidth,
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
+    [theme.breakpoints.up('sm')]: { width: `calc(100% - ${drawerWidth}px)` },
   },
   menuButton: {
     marginRight: 20,
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
+    [theme.breakpoints.up('sm')]: { display: 'none' },
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-  },
+  drawerPaper: { width: drawerWidth },
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    textAlign: "center",
+    textAlign: 'center',
   },
-  grow: {
-    flexGrow: 1,
-  },
-  languagebar: {
-    textAlign: "center",
-  }
+  grow: { flexGrow: 1 },
+  languagebar: { textAlign: 'center' },
 });
 
 class ResponsiveDrawer extends React.Component {
-  state = {
-    mobileOpen: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = { mobileOpen: false };
+  }
 
-  handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
-  };
+  handleDrawerToggle() {
+    const { mobileOpen } = this.state;
+
+    this.setState({ mobileOpen: !mobileOpen });
+  }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, container } = this.props;
+    const { mobileOpen } = this.state;
 
     const drawer = (
       <div>
         <div className={classes.toolbar} />
         <Divider />
         <List className={classes.languagebar}>
-          {['JavaScript', 'Python', 'Ruby', 'Swift', 'Java', 'C#', 'SQL', 'PHP', 'C++', 'HTML/CSS'].map((text, index) => (
+          {['JavaScript', 'Python', 'Ruby', 'Swift', 'Java', 'C#', 'SQL', 'PHP', 'C++', 'HTML/CSS'].map(text => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>
@@ -91,11 +69,11 @@ class ResponsiveDrawer extends React.Component {
           {['Forum', 'Creators', 'Contact', 'Setting'].map((text, index) => (
             <ListItem button key={text}>
 
-            {/* Original code */}
-            {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-            {/* Need to figure out how to correctly add icon */}
+              {/* Original code */}
+              {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
+              {/* Need to figure out how to correctly add icon */}
 
-              <ListItemIcon>{index % 2 === 0 ? <Add/> : <Face />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <Add /> : <Face />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -114,9 +92,9 @@ class ResponsiveDrawer extends React.Component {
               onClick={this.handleDrawerToggle}
               className={classes.menuButton}
             >
-              <MenuIcon />
+              <Menu />
             </IconButton>
-            <Typography variant="h6" color="inherit" className={classes.grow }noWrap>
+            <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
               Programming Reference Site
             </Typography>
             <Button color="inherit">Login</Button>
@@ -127,26 +105,20 @@ class ResponsiveDrawer extends React.Component {
           {/* The implementation can be swap with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
             <Drawer
-              container={this.props.container}
+              container={container}
               variant="temporary"
               anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={this.state.mobileOpen}
+              open={mobileOpen}
               onClose={this.handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
+              classes={{ paper: classes.drawerPaper }}
+              ModalProps={{ keepMounted: true }}
             >
               {drawer}
             </Drawer>
           </Hidden>
           <Hidden xsDown implementation="css">
             <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
+              classes={{ paper: classes.drawerPaper }}
               variant="permanent"
               open
             >
@@ -157,11 +129,11 @@ class ResponsiveDrawer extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Typography paragraph>
-          <h1>Welcome to the Programming Reference Site</h1>
+            <h1>Welcome to the Programming Reference Site</h1>
           </Typography>
           <Typography paragraph>
           This project was created to create a website to help individuals programmers, ranging from novice to advanced, to have a reference site, where specific links, githubs, articles, etc. are listed and recommended by programmers such as yourself!
-          We understand the importance of using a search engine, but we also understand that there are so many resources out there, sometimes you don't know what is good or not! 
+          We understand the importance of using a search engine, but we also understand that there are so many resources out there, sometimes you don‘t know what is good or not!
           This website is to help the individual programmers to find the best sources and backed up by other programmers, who have looked into the references themselves!
           Please feel free to add any input on this ongoing project! We would love to hear your insight and improve the site!
           </Typography>
@@ -172,11 +144,9 @@ class ResponsiveDrawer extends React.Component {
 }
 
 ResponsiveDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  // Injected by the documentation to work in an iframe.
-  // You won't need it on your project.
-  container: PropTypes.object,
-  theme: PropTypes.object.isRequired,
+  classes: PropTypes.shape({}).isRequired,
+  container: PropTypes.shape({}),
+  theme: PropTypes.shape({}).isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
@@ -193,7 +163,6 @@ export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
 // import Hidden from '@material-ui/core/Hidden';
 // import Divider from '@material-ui/core/Divider';
 // import MenuIcon from '@material-ui/icons/Menu';
-
 
 // const drawerWidth = 240;
 
