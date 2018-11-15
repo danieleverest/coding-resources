@@ -5,4 +5,3 @@ const auth = require('./auth');
 module.exports.users = users;
 module.exports.auth = auth;
 module.exports.resources = resources;
-module.exports.auth = auth;
