@@ -1,5 +1,4 @@
 const express = require('express');
-require('./auth/auth');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');

@@ -1,34 +1,57 @@
 const router = require('express').Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const { secret } = require('../config');
+const User = require('../db/models/users');
 
-// /auth/signup
-router.post('/signup', passport.authenticate('signup', { session: false }), async (req, res) => {
-  res.json({
-    message: 'Signup successful',
-    user: req.user,
-  });
+// /auth/register
+router.post('/register', async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+    const user = await User.create({
+      username,
+      email,
+      password,
+    });
+    res.json({
+      success: true,
+      message: 'Registration successful',
+      user,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: 'Unable to register',
+      error,
+    });
+  }
 });
 
-router.post('/login', async (req, res, next) => {
-  passport.authenticate('login', async (err, user, info) => {
-    try {
-      if (err || !user) {
-        return next(err)
-      }
-
-      req.login(user, { session: false }, async (error) => {
-        if (error) return next(error);
-        const body = { _id: user._id, username: user.username };
-        const token = jwt.sign({ user: body }, secret);
-        return res.json({ token });
+// /auth/login
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    // User not found
+    if (!user) {
+      res.json({
+        success: false,
+        message: 'Unable to login. User not found',
       });
-    } catch (error) {
-      return next(error);
     }
-  })(req, res, next);
+    // Incorrect password
+    if (!user.checkPassword(password)) {
+      res.json({
+        success: false,
+        message: 'Unable to login. Incorrect password',
+      });
+    }
+    // User found and correct password: return token
+    res.json(user.login());
+  } catch (error) {
+    res.json({
+      success: false,
+      message: 'Unable to login',
+      error,
+    });
+  }
 });
-
 
 module.exports = router;
