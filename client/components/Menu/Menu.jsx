@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-
 import {
   Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemIcon, ListItemText,
 } from '@material-ui/core';
 import { Face, Add, Menu } from '@material-ui/icons';
+import IndividualLink from '../IndividualLink/IndividualLink';
 
 const drawerWidth = 240;
 
@@ -128,6 +128,7 @@ class ResponsiveDrawer extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
+          <IndividualLink />
           <Typography paragraph>
             <h1>Welcome to the Programming Reference Site</h1>
           </Typography>

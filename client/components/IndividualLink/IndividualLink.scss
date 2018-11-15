@@ -1,0 +1,23 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 40vh 1fr;
+}
+
+.languageIcon {
+  height: 150px;
+  width: auto;
+}
+
+.description {
+  border: 1px solid black;
+  height: auto;
+}
+
+.description h2 {
+  text-decoration: underline;
+}
+
+.commentZone {
+  grid-column: 1/3;
+}
