@@ -1,24 +1,24 @@
 import React from 'react';
 import Menu from './components/Menu/Menu';
-import { 
-  Footer,
-  TestStatefullComponent, 
-  LinkListPage } 
-from './components';
-import './App.scss';
 
+// import {
+//   Footer,
+//   TestStatefullComponent,
+//   LinkListPage }
+// from './components';
+import './App.scss';
 
 export class Main extends React.Component {
   render() {
     return(
-      <div classname="App">
-        <Menu/>
+      <div className="App">
+        <Menu />
         {/* <TestStatefullComponent/>
         <LinkListPage/> */}
       </div>
-    )
+    );
   }
-};
+}
 
 export default Main;
 
