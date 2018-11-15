@@ -2,16 +2,16 @@ const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const Comments = new mongoose.Schema({
+const commentSchema = new mongoose.Schema({
   author: {
     type: ObjectId,
     required: [true, 'Must be logged in to comment'],
+    ref: 'User',
   },
-  comment: {
+  text: {
     type: String,
-    required: [true, 'Please enter a comment']
+    required: [true, 'Please enter a comment'],
   },
-  replies: { type: [ObjectId] },
 });
 
-module.exports = mongoose.model('comments', Comments);
+module.exports = mongoose.model('Comment', commentSchema);

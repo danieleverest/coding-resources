@@ -7,5 +7,5 @@ module.exports = (app) => {
   app.use('/users', users);
   app.use('/auth', auth);
   app.use('/resources', resources);
-  app.use('/comments', comments);
+  app.use('/resources/:resource_id/comments', comments);
 };

@@ -1,12 +1,13 @@
 const router = require('express').Router();
+const { loginRequired } = require('../auth');
+const Resource = require('../models/resource');
 
-const Resources = require('../db/models/resources');
-
-router.post('/', async (req, res) => {
+router.post('/', loginRequired, async (req, res) => {
   try {
     const { resourceName } = req.body;
+    const submittedBy = req.user._id;
 
-    const resource = new Resources({ resourceName });
+    const resource = new Resource({ resourceName, submittedBy });
 
     const newResource = await resource.save();
 
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try {
-    const resources = await Resources.find({});
+    const resources = await Resource.find({});
 
     res.json(resources);
   } catch (error) {
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const resource = await Resources.findById(req.params.id);
+    const resource = await Resource.findById(req.params.id);
 
     res.json(resource || 'Resource not found');
   } catch (error) {
@@ -38,7 +39,7 @@ router.get('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const resource = await Resources.findByIdAndUpdate(req.params.id);
+    const resource = await Resource.findByIdAndUpdate(req.params.id);
 
     res.json(resource || 'Resource not found');
   } catch (error) {
@@ -48,7 +49,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const deletedResource = await Resources.findByIdAndDelete(req.params.id);
+    const deletedResource = await Resource.findByIdAndDelete(req.params.id);
 
     res.json(deletedResource ? `Deleted ${deletedResource.resourceName}` : 'Resource not found');
   } catch (error) {
