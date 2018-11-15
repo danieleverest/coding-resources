@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../db/models/users');
+const User = require('../models/user');
 
 // /auth/register
 router.post('/register', async (req, res) => {
@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
     res.json({
       success: true,
       message: 'Registration successful',
-      user,
+      user: user._id,
     });
   } catch (error) {
     res.json({

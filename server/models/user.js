@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const { secret } = require('../../config');
+const { secret } = require('../config');
 
-const Users = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
@@ -64,8 +64,8 @@ function login() {
   };
 }
 
-Users.pre('save', encryptPassword);
-Users.methods.checkPassword = comparePassword;
-Users.methods.login = login;
+userSchema.pre('save', encryptPassword);
+userSchema.methods.checkPassword = comparePassword;
+userSchema.methods.login = login;
 
-module.exports = mongoose.model('users', Users);
+module.exports = mongoose.model('User', userSchema);

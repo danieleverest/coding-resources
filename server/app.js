@@ -10,10 +10,6 @@ app.use(morgan('combined'));
 app.use(helmet());
 app.use(cors());
 
-const { users, resources, auth } = require('./routes');
-
-app.use('/users', users);
-app.use('/auth', auth);
-app.use('/resources', resources);
+require('./routes')(app);
 
 module.exports = app;
