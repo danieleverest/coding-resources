@@ -10,11 +10,10 @@ router.get('/', async (req, res) => {
       success: true,
       comments,
     });
-  } catch (error) {
+  } catch ({ message }) {
     res.json({
       success: false,
-      message: 'Could not fetch comments',
-      error,
+      message,
     })
   }
 });
@@ -26,11 +25,10 @@ router.get('/:comment_id', async (req, res) => {
       success: true,
       comment,
     });
-  } catch (error) {
-    res.json({
+  } catch ({ message }) {
+    res.status(401).json({
       success: false,
-      message: 'Could not fetch comment',
-      error,
+      message,
     })
   }
 });
@@ -48,15 +46,14 @@ router.post('/', loginRequired, async (req, res) => {
     resource.comments.push(comment);
     resource.save();
 
-    res.json({
+    res.status(200).json({
       success: true,
       comment,
     });
-  } catch (error) {
-    res.json({
+  } catch ({ message }) {
+    res.status(400).json({
       success: false,
-      message: 'Could not add comment',
-      error,
+      message,
     });
   }
 });

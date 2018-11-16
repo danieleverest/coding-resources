@@ -5,21 +5,19 @@ const User = require('../models/user');
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const user = await User.create({
+    await User.create({
       username,
       email,
       password,
     });
-    res.json({
+    res.status(201).json({
       success: true,
       message: 'Registration successful',
-      user: user._id,
     });
-  } catch (error) {
-    res.json({
+  } catch ({ message }) {
+    res.status(400).json({
       success: false,
-      message: 'Unable to register',
-      error,
+      message,
     });
   }
 });
@@ -30,26 +28,16 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     // User not found
-    if (!user) {
-      res.json({
-        success: false,
-        message: 'Unable to login. User not found',
-      });
-    }
+    if (!user) throw new Error('Username not found');
     // Incorrect password
-    if (!user.checkPassword(password)) {
-      res.json({
-        success: false,
-        message: 'Unable to login. Incorrect password',
-      });
-    }
+    const pwIsValid = await user.checkPassword(password)
+    if (!pwIsValid) throw new Error('Password is incorrect');
     // User found and correct password: return token
     res.json(user.login());
-  } catch (error) {
+  } catch ({ message }) {
     res.json({
       success: false,
-      message: 'Unable to login',
-      error,
+      message,
     });
   }
 });
