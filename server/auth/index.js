@@ -1,18 +1,25 @@
 const jwt = require('jsonwebtoken');
 const { secret } = require('../config');
 
+// function for express middleware for routes that require authentication to access
 exports.loginRequired = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    // get auth from header
+    const { authorization } = req.headers;
+    // get token from 'bearer <token>' format
+    const token = authorization.split(' ')[1];
+
+    // jwt checks to see if the token is valid: error or decoded payload
     jwt.verify(token, secret, (error, decode) => {
-      if (error) throw Error();
+      if (error) throw new Error(error);
+      // add the payload to the req and continue to route
       req.user = decode;
       next();
     });
   } catch (error) {
     res.status(401).json({
       success: false,
-      message: 'Not authorized. Please login first',
+      message: 'Not authorized. Please login again',
     });
   }
 };

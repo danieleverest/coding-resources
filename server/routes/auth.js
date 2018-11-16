@@ -5,6 +5,7 @@ const User = require('../models/user');
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
+    // input validated pre-save by User model and password hashed
     await User.create({
       username,
       email,
@@ -32,8 +33,8 @@ router.post('/login', async (req, res) => {
     // Incorrect password
     const pwIsValid = await user.checkPassword(password)
     if (!pwIsValid) throw new Error('Password is incorrect');
-    // User found and correct password: return token
-    res.json(user.login());
+    // User found and correct password: login()
+    user.login(res);
   } catch ({ message }) {
     res.json({
       success: false,

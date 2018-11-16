@@ -40,7 +40,7 @@ router.post('/', loginRequired, async (req, res) => {
       author: req.user._id,
       text: req.body.text,
     });
-    // get parent resource
+    // get relevant resource
     const resource = await Resource.findById(req.params.resource_id);
     // add new comment to resource and save
     resource.comments.push(comment);

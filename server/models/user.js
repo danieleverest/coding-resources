@@ -50,18 +50,26 @@ async function comparePassword(password) {
   return compare;
 }
 
-function login() {
-  const { username, email, _id } = this;
-  const token = jwt.sign(({
-    username,
-    email,
-    _id,
-  }), secret);
-  return {
-    success: true,
-    message: 'Successfully logged in',
-    token,
-  };
+function login(res) {
+  try {
+    const { username, _id } = this;
+    // the token payload. No sensitive data
+    const token = jwt.sign(({
+      username,
+      _id,
+    }), secret);
+    // return token to be sent with future requests
+    res.json({
+      success: true,
+      message: 'Successfully logged in',
+      token,
+    });
+  } catch ({ message }) {
+    res.json({
+      success: false,
+      message,
+    });
+  }
 }
 
 userSchema.pre('save', encryptPassword);

@@ -10,7 +10,7 @@ router.post('/', loginRequired, async (req, res) => {
     await resource.save();
 
     res.status(200).json({
-      success: false,
+      success: true,
       message: 'New resource submitted',
     });
   } catch ({ message }) {
