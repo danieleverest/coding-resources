@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import {
-  Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemIcon, ListItemText,
-} from '@material-ui/core';
+import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { Face, Add, Menu } from '@material-ui/icons';
+
 import IndividualLink from '../IndividualLink/IndividualLink';
 
 const drawerWidth = 240;
@@ -68,11 +67,9 @@ class ResponsiveDrawer extends React.Component {
         <List>
           {['Forum', 'Creators', 'Contact', 'Setting'].map((text, index) => (
             <ListItem button key={text}>
-
               {/* Original code */}
               {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
               {/* Need to figure out how to correctly add icon */}
-
               <ListItemIcon>{index % 2 === 0 ? <Add /> : <Face />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -129,10 +126,8 @@ class ResponsiveDrawer extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <IndividualLink />
-          <Typography paragraph>
-            <h1>Welcome to the Programming Reference Site</h1>
-          </Typography>
-          <Typography paragraph>
+          <Typography variant="h6">Welcome to the Programming Reference Site</Typography>
+          <Typography>
           This project was created to create a website to help individuals programmers, ranging from novice to advanced, to have a reference site, where specific links, githubs, articles, etc. are listed and recommended by programmers such as yourself!
           We understand the importance of using a search engine, but we also understand that there are so many resources out there, sometimes you don‘t know what is good or not!
           This website is to help the individual programmers to find the best sources and backed up by other programmers, who have looked into the references themselves!
