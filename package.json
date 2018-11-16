@@ -28,16 +28,25 @@
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
+    "argon2": "^0.19.3",
     "axios": "^0.18.0",
-    "concurrently": "^4.0.1",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "helmet": "^3.15.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.3.9",
+    "morgan": "^1.9.1",
+    "npm-run-all": "^4.1.3",
+    "prop-types": "^15.6.2",
     "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "prop-types": "^15.6.2"
+    "react-dom": "^16.6.0"
   },
   "scripts": {
     "client": "webpack-dev-server --mode development --open",
     "server": "cd server && nodemon server.js",
-    "start": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
+    "start": "run-p client server",
     "build": "webpack --mode production",
     "test": "npm run build"
   },
