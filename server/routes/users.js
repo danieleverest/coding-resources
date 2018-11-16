@@ -19,85 +19,73 @@ router.get('/', async (req, res) => {
   }
 });
 
-// View user profile page
+// View user
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    if (!user) {
-      res.json({
-        success: false,
-        message: 'User not found',
-      });
-    }
-    res.json({
+    if (!user) throw new Error('User not found');
+    res.status(200).json({
       success: true,
       user,
     });
-  } catch (error) {
+  } catch ({ message }) {
     res.status(400).json({
       success: false,
-      error,
+      message,
     });
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', loginRequired, async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, { password: 123 });
-    if (!user) {
-      res.json({
-        success: false,
-        message: 'User not found',
-      });
-    }
-    res.json({
+    const { update } = req.body;
+    const user = await User.findById(req.params.id)
+    if (!user) throw new Error('User not found');
+    Object.assign(user, update);
+    await user.save();
+    res.status(200).json({
       success: true,
       message: 'User updated',
+      user,
     });
-  } catch (error) {
+  } catch ({ message }) {
     res.status(400).json({
       success: false,
-      error,
+      message,
     });
   }
 });
 
 // Delete user
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', loginRequired, async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      res.json({
-        success: false,
-        message: 'User not found',
-      });
-    }
-    res.json({
+    if (!user) throw new Error('User not found');
+    res.status(200).json({
       success: true,
       message: 'User deleted',
     });
-  } catch (error) {
+  } catch ({ message }) {
     res.status(400).json({
       success: false,
-      error,
+      message,
     });
   }
 });
 
-// Dev only
+// Dev only for testing
 // TO BE DELETED
-router.delete('/', loginRequired, async (req, res) => {
+router.delete('/', async (req, res) => {
   try {
     await User.deleteMany({});
     res.json({
       success: true,
       message: 'All users deleted',
     });
-  } catch (error) {
-    res.status(400).json({
+  } catch ({ message }) {
+    res.status(401).json({
       success: false,
-      message: 'Not authorized: Unable to delete users',
-      error,
+      message,
     });
   }
 });
