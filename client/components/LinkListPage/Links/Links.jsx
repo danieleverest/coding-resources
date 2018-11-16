@@ -6,7 +6,6 @@ import { Button } from '@material-ui/core';
 import './Links.scss';
 
 const link = (props) => {
-
   const { url, title, tags, votes } = props;
 
   return (
@@ -19,7 +18,7 @@ const link = (props) => {
           {tags.map(tag => <Button className="tag" variant="outlined" color="primary">{tag}</Button>)}
         </div>
         <div>
-          <Button className="linkVotes" variant="raised" color="secondary">
+          <Button className="linkVotes" variant="contained" color="secondary">
             Votes:
             {votes}
           </Button>
