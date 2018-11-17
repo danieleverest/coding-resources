@@ -7,7 +7,6 @@ import LinkListPage from './components/LinkListPage/LinkListPage';
 const app = () => (
   <div className="App">
     <Menu />
-    <LinkListPage />
   </div>
 );
 
