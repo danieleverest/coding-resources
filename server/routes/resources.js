@@ -2,26 +2,51 @@ const router = require('express').Router();
 const { loginRequired } = require('../auth');
 const Resource = require('../models/resource');
 
-router.post('/', loginRequired, async (req, res) => {
-  try {
-    const { resourceName } = req.body;
-    const submittedBy = req.user._id;
-    const resource = new Resource({ resourceName, submittedBy });
-    await resource.save();
+const CATEGORIES = [
+  'JavaScript',
+  'C++',
+  'Java',
+  'Python',
+];
 
-    res.status(200).json({
-      success: true,
-      message: 'New resource submitted',
-    });
-  } catch ({ message }) {
-    res.status(400).json({
-      success: false,
-      message,
-    });
-  }
-});
+/**
+ * Returns array of categories
+ * @public GET /resources/categories
+ */
+router.get('/categories', (req, res) => res.send(CATEGORIES));
 
-router.get('/', async (req, res) => {
+/**
+ * Returns array of all resources
+ * @public GET /resources
+ */
+router.get('/', getAllResources);
+
+/**
+ * Returns one resource
+ * @public GET /resources/:id
+ */
+router.get('/:id', getOneResource);
+
+/**
+ * Submit a new resource
+ * @private POST /resources
+ */
+router.post('/', loginRequired, newResource);
+
+/**
+ * Edit a resource
+ * @private PUT /resources/:id
+ */
+router.put('/:id', loginRequired, editResource);
+
+/**
+ * Delete a resource
+ * @private DELETE /resources/:id
+ */
+router.delete('/:id', loginRequired, deleteResource);
+
+// router functions
+async function getAllResources(req, res) {
   try {
     const resources = await Resource.find({});
 
@@ -35,12 +60,12 @@ router.get('/', async (req, res) => {
       message,
     });
   }
-});
+}
 
-router.get('/:id', async (req, res) => {
+async function getOneResource(req, res) {
   try {
     const resource = await Resource.findById(req.params.id);
-    if (!resource) throw new Error('Resource not found')
+    if (!resource) throw new Error('Resource not found');
     res.status(200).json({
       success: true,
       resource,
@@ -51,13 +76,41 @@ router.get('/:id', async (req, res) => {
       message,
     });
   }
-});
+}
 
-router.put('/:id', async (req, res) => {
+async function newResource(req, res) {
   try {
-    const { update } = req.body;
+    const { resourceName, link, category, desc } = req.body;
+    if (!CATEGORIES.includes(category)) throw new Error('Category does not exist');
+    const submittedBy = req.user._id;
+    const resource = new Resource({
+      resourceName,
+      link,
+      submittedBy,
+      category,
+      desc,
+    });
+    await resource.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'New resource submitted',
+    });
+  } catch ({ message }) {
+    res.status(400).json({
+      success: false,
+      message,
+    });
+  }
+}
+
+async function editResource(req, res) {
+  try {
     const resource = await Resource.findById(req.params.id);
-    if (!resource) throw new Error('Resource not found')
+    if (!resource) throw new Error('Resource not found');
+    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot edit resources you did not submit');
+
+    const { update } = req.body;
     Object.assign(resource, update);
     await resource.save();
 
@@ -72,12 +125,16 @@ router.put('/:id', async (req, res) => {
       message,
     });
   }
-});
+}
 
-router.delete('/:id', async (req, res) => {
+async function deleteResource(req, res) {
   try {
-    const resource = await Resource.findByIdAndDelete(req.params.id);
-    if (!resource) throw new Error('Resource not found')
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) throw new Error('Resource not found');
+    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot delete resources you did not submit');
+
+    resource.delete();
+
     res.status(200).json({
       success: true,
       resource,
@@ -88,6 +145,5 @@ router.delete('/:id', async (req, res) => {
       message,
     });
   }
-});
-
+}
 module.exports = router;

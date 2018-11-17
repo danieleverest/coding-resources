@@ -8,6 +8,7 @@ module.exports = {
     "linebreak-style": 0,
     "react/require-default-props": 0,
     "no-underscore-dangle": 0,
+    "no-use-before-define": 0,
     "object-curly-newline": ["error", { "multiline": true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "max-len": [

@@ -3,7 +3,26 @@ const { loginRequired } = require('../auth');
 const Comment = require('../models/comment');
 const Resource = require('../models/resource');
 
-router.get('/', async (req, res) => {
+/**
+ * Returns array of comments for resource
+ * @public GET /resources/:resource_id/comments
+ */
+router.get('/', getAllComments);
+
+/**
+ * Returns a single comment
+ * @public GET /resources/:resource_id/comments/:comment_id
+ */
+router.get('/:comment_id', getOneComment);
+
+/**
+ * Submit a comment
+ * @private POST /resources/:resource_id/comments
+ */
+router.post('/', loginRequired, submitComment);
+
+// Route functions
+async function getAllComments(req, res) {
   try {
     const { comments } = await Resource.findById(req.params.resource_id);
     res.json({
@@ -14,11 +33,11 @@ router.get('/', async (req, res) => {
     res.json({
       success: false,
       message,
-    })
+    });
   }
-});
+}
 
-router.get('/:comment_id', async (req, res) => {
+async function getOneComment(req, res) {
   try {
     const comment = await Comment.findById(req.params.comment_id);
     res.json({
@@ -29,11 +48,11 @@ router.get('/:comment_id', async (req, res) => {
     res.status(401).json({
       success: false,
       message,
-    })
+    });
   }
-});
+}
 
-router.post('/', loginRequired, async (req, res) => {
+async function submitComment(req, res) {
   try {
     // save new comment
     const comment = await Comment.create({
@@ -56,6 +75,6 @@ router.post('/', loginRequired, async (req, res) => {
       message,
     });
   }
-});
+}
 
 module.exports = router;

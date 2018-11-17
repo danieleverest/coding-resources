@@ -1,8 +1,20 @@
 const router = require('express').Router();
 const User = require('../models/user');
 
-// /auth/register
-router.post('/register', async (req, res) => {
+/**
+ * Register new user
+ * @public POST /auth/register
+ */
+router.post('/register', register);
+
+/**
+ * Login. Returns json web token
+ * @public POST /auth/register
+ */
+router.post('/login', login);
+
+// Route functions
+async function register(req, res) {
   try {
     const { username, email, password } = req.body;
     // input validated pre-save by User model and password hashed
@@ -21,10 +33,9 @@ router.post('/register', async (req, res) => {
       message,
     });
   }
-});
+}
 
-// /auth/login
-router.post('/login', async (req, res) => {
+async function login(req, res) {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -41,6 +52,6 @@ router.post('/login', async (req, res) => {
       message,
     });
   }
-});
+}
 
 module.exports = router;
