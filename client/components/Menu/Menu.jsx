@@ -6,6 +6,7 @@ import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography
 import { Face, Add, Menu } from '@material-ui/icons';
 
 import IndividualLink from '../IndividualLink/IndividualLink';
+import LinkListPage from '../LinkListPage/LinkListPage';
 
 const drawerWidth = 240;
 
@@ -125,7 +126,8 @@ class ResponsiveDrawer extends React.Component {
         </nav>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <IndividualLink />
+          {/* <IndividualLink /> */}
+          <LinkListPage />
           <Typography variant="h6">Welcome to the Programming Reference Site</Typography>
           <Typography>
           This project was created to create a website to help individuals programmers, ranging from novice to advanced, to have a reference site, where specific links, githubs, articles, etc. are listed and recommended by programmers such as yourself!
