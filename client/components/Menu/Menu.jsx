@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemText } from '@material-ui/core';
 import { Face, Add, Menu } from '@material-ui/icons';
 
 import IndividualLink from '../IndividualLink/IndividualLink';
@@ -49,7 +49,7 @@ class ResponsiveDrawer extends React.Component {
   }
 
   render() {
-    const { classes, theme, container } = this.props;
+    const { classes, theme, container, title} = this.props;
     const { mobileOpen } = this.state;
 
     const drawer = (
@@ -65,12 +65,8 @@ class ResponsiveDrawer extends React.Component {
         </List>
         <Divider />
         <List>
-          {['Forum', 'Creators', 'Contact', 'Setting'].map((text, index) => (
+          {['Forum', 'Creators', 'Contact', 'Setting'].map(text => (
             <ListItem button key={text}>
-              {/* Original code */}
-              {/* <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon> */}
-              {/* Need to figure out how to correctly add icon */}
-              <ListItemIcon>{index % 2 === 0 ? <Add /> : <Face />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

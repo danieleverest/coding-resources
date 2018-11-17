@@ -1,14 +1,16 @@
 import React from 'react';
-import { Menu } from './components';
+import { Menu, LinkListPage } from './components';
 import './App.scss';
-import LinkListPage from './components/LinkListPage/LinkListPage';
+
 
 
 const app = () => (
+  <Menu>
   <div className="App">
-    <Menu />
+    {/* <Menu /> */}
     <LinkListPage />
   </div>
+  </Menu>
 );
 
 export default app;
