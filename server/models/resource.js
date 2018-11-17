@@ -7,16 +7,39 @@ const resourceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  link: {
+    type: String,
+    required: true,
+  },
   submittedBy: {
     type: ObjectId,
     required: true,
     ref: 'User',
   },
+  category: {
+    type: String,
+    required: true,
+  },
+  desc: {
+    type: String,
+  },
+  tags: [{
+    type: String,
+    trim: true,
+    lowercase: true,
+  }],
   comments: [{
     type: ObjectId,
     ref: 'Comment',
   }],
-  tags: [],
+  rank: {
+    type: Number,
+    default: 0,
+  },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);

@@ -2,9 +2,39 @@ const router = require('express').Router();
 const User = require('../models/user');
 const { loginRequired } = require('../auth');
 
-// Backend only
-// Don't think it needs to connect to frontend
-router.get('/', async (req, res) => {
+/**
+ * Get a list of all registered users
+ * @public GET /users
+ */
+router.get('/', getAllUsers);
+
+/**
+ * Get a single user
+ * @public GET /users/:id
+ */
+router.get('/:id', getOneUser)
+
+/**
+ * Edit a user
+ * @private PUT /users/:id
+ */
+router.put('/:id', loginRequired, editUser);
+
+/**
+ * Delete a user
+ * @private DELETE /users/:id
+ */
+router.delete('/:id', loginRequired, deleteUser);
+
+/**
+ * Delete a user
+ * @private DELETE /users/:id
+ * TO BE DELETED
+ */
+router.delete('/', deleteAllUsers);
+
+// Route functions
+async function getAllUsers(req, res) {
   try {
     const users = await User.find({});
     res.json({
@@ -17,10 +47,9 @@ router.get('/', async (req, res) => {
       error,
     });
   }
-});
+}
 
-// View user
-router.get('/:id', async (req, res) => {
+async function getOneUser(req, res) {
   try {
     const user = await User.findById(req.params.id);
     if (!user) throw new Error('User not found');
@@ -34,9 +63,9 @@ router.get('/:id', async (req, res) => {
       message,
     });
   }
-});
+}
 
-router.put('/:id', loginRequired, async (req, res) => {
+async function editUser(req, res) {
   try {
     const { update } = req.body;
     const user = await User.findById(req.params.id)
@@ -54,10 +83,9 @@ router.put('/:id', loginRequired, async (req, res) => {
       message,
     });
   }
-});
+}
 
-// Delete user
-router.delete('/:id', loginRequired, async (req, res) => {
+async function deleteUser(req, res) {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (!user) throw new Error('User not found');
@@ -71,11 +99,9 @@ router.delete('/:id', loginRequired, async (req, res) => {
       message,
     });
   }
-});
+}
 
-// Dev only for testing
-// TO BE DELETED
-router.delete('/', async (req, res) => {
+async function deleteAllUsers(req, res) {
   try {
     await User.deleteMany({});
     res.json({
@@ -88,6 +114,5 @@ router.delete('/', async (req, res) => {
       message,
     });
   }
-});
-
+}
 module.exports = router;
