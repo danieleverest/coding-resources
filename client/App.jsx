@@ -5,12 +5,9 @@ import './App.scss';
 
 
 const app = () => (
-  <Menu>
   <div className="App">
-    {/* <Menu /> */}
-    <LinkListPage />
+    <Menu/>>
   </div>
-  </Menu>
 );
 
 export default app;
