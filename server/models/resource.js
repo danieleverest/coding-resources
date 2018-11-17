@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
 const resourceSchema = new mongoose.Schema({
-  resourceName: {
+  name: {
     type: String,
     required: true,
   },
