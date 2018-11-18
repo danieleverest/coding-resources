@@ -54,10 +54,10 @@ async function getAllResources(req, res) {
       success: true,
       resources,
     });
-  } catch ({ message }) {
+  } catch (error) {
     res.status(400).json({
       success: false,
-      message,
+      error,
     });
   }
 }
@@ -70,21 +70,21 @@ async function getOneResource(req, res) {
       success: true,
       resource,
     });
-  } catch ({ message }) {
+  } catch (error) {
     res.status(400).json({
       success: false,
-      message,
+      error,
     });
   }
 }
 
 async function newResource(req, res) {
   try {
-    const { resourceName, link, category, desc } = req.body;
+    const { name, link, category, desc } = req.body;
     if (!CATEGORIES.includes(category)) throw new Error('Category does not exist');
     const submittedBy = req.user._id;
     const resource = new Resource({
-      resourceName,
+      name,
       link,
       submittedBy,
       category,

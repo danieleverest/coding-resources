@@ -4,6 +4,7 @@ module.exports = {
     "browser": true,
     "node": true,
   },
+  "parser": "babel-eslint",
   "rules": {
     "linebreak-style": 0,
     "react/jsx-one-expression-per-line": 0,
