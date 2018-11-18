@@ -3,6 +3,8 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const { secret } = require('../config');
 
+const { ObjectId } = mongoose.Schema.Types;
+
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -25,14 +27,14 @@ const userSchema = new mongoose.Schema({
     maxlength: [24, 'Must be under 25 characters'],
     required: [true, 'Password is required'],
   },
-  links: {
-    type: Array,
-    default: [],
-  },
-  saved: {
-    type: Array,
-    default: [],
-  },
+  submittedResources: [{
+    type: ObjectId,
+    ref: 'Resource',
+  }],
+  saved: [{
+    type: ObjectId,
+    ref: 'Resource',
+  }],
   created: {
     type: Date,
     default: Date.now,
