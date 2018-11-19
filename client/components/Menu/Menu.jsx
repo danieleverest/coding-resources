@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { withStyles } from '@material-ui/core/styles';
-import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemText } from '@material-ui/core';
-import { Menu } from '@material-ui/icons';
-
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemText, InputBase } from '@material-ui/core';
+import { Menu, Search as SearchIcon } from '@material-ui/icons';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
-
-import Intro from '../Intro/Intro';
-import IndividualLink from '../IndividualLink/IndividualLink';
-import LinkListPage from '../LinkListPage/LinkListPage';
+import { Intro } from '..';
 
 const drawerWidth = 240;
+window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 const styles = theme => ({
   root: { display: 'flex' },
@@ -39,19 +33,13 @@ const styles = theme => ({
     padding: theme.spacing.unit * 3,
     textAlign: 'center',
   },
-  grow: { 
-    flexGrow: 1, 
-  },
-  languagebar: { 
-    textAlign: 'center',
-  },
+  grow: { flexGrow: 1 },
+  languagebar: { textAlign: 'center' },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
+    '&:hover': { backgroundColor: fade(theme.palette.common.white, 0.25) },
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
@@ -81,16 +69,10 @@ const styles = theme => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: 120,
-      '&:focus': {
-        width: 200,
-      },
+      '&:focus': { width: 200 },
     },
   },
 });
-
-
-// Notes
-// possibly relocate the login/sign in button or search button
 
 class ResponsiveDrawer extends React.Component {
   constructor(props) {
@@ -110,23 +92,20 @@ class ResponsiveDrawer extends React.Component {
 
     const drawer = (
       <div>
-        <div className={classes.toolbar} /> 
-
-        {/* Could add title or search input here?? */}
+        <div className={classes.toolbar} />
         <div className={classes.grow} />
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-              />
-            </div>
-
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+        </div>
         <Divider />
         <List className={classes.languagebar}>
           {['JavaScript', 'Python', 'Ruby', 'Swift', 'Java', 'C#', 'SQL', 'PHP', 'C++', 'HTML/CSS'].map(text => (
@@ -149,8 +128,6 @@ class ResponsiveDrawer extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-{/* AppBar */}
-
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton
@@ -166,10 +143,7 @@ class ResponsiveDrawer extends React.Component {
             </Typography>
             <Button color="inherit">Login</Button>
             <Button color="inherit">Sign up</Button>
-
-
-{/* Search Button */}
-            {/* <div className={classes.grow} />
+            <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -181,12 +155,9 @@ class ResponsiveDrawer extends React.Component {
                   input: classes.inputInput,
                 }}
               />
-            </div> */}
+            </div>
           </Toolbar>
         </AppBar>
-        
-{/* Programming languages */}
-
         <nav className={classes.drawer}>
           {/* The implementation can be swap with js to avoid SEO duplication of links. */}
           <Hidden smUp implementation="css">
@@ -212,9 +183,7 @@ class ResponsiveDrawer extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-{/* Main */}
-{/* Add components here */}
-
+        {/* Add components here */}
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Intro />
