@@ -141,8 +141,6 @@ class ResponsiveDrawer extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow} noWrap>
               Programming Reference Site
             </Typography>
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Sign up</Button>
             <div className={classes.grow} />
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -156,6 +154,8 @@ class ResponsiveDrawer extends React.Component {
                 }}
               />
             </div>
+            <Button color="inherit">Login</Button>
+            <Button color="inherit">Sign up</Button>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
