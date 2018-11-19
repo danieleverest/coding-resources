@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Card, Chip, CardContent, Avatar } from '@material-ui/core';
-
 import { ThumbUp } from '@material-ui/icons';
 
 import './Links.scss';
@@ -26,9 +25,7 @@ const link = (props) => {
             />
           ))}
         </div>
-        <div>
-          <Button className="linkVotes" variant="contained">Upvote: <ThumbUp style={{ margin: '0 10px' }} />{votes}</Button>
-        </div>
+        <Button className="linkVotes" variant="contained">Upvote: <ThumbUp style={{ margin: '0 10px' }} />{votes}</Button>
       </CardContent>
     </Card>
   );
