@@ -42,7 +42,7 @@ async function login(req, res) {
     // User not found
     if (!user) throw new Error('Username not found');
     // Incorrect password
-    const pwIsValid = await user.checkPassword(password)
+    const pwIsValid = await user.checkPassword(password);
     if (!pwIsValid) throw new Error('Password is incorrect');
     // User found and correct password: login()
     user.login(res);
