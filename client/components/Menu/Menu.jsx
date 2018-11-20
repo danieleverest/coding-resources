@@ -7,7 +7,8 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 
 // import { Intro } from '..';
 // import { Login } from '..';
-import { Register } from '..';
+// import { Register } from '..';
+import { SubmitLink } from '..';
 
 const drawerWidth = 240;
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
@@ -110,7 +111,7 @@ class ResponsiveDrawer extends React.Component {
         </div>
         <Divider />
         <List className={classes.languagebar}>
-          {['JavaScript', 'Python', 'Ruby', 'Swift', 'Java', 'C#', 'SQL', 'PHP', 'C++', 'HTML/CSS'].map(text => (
+          {['JavaScript', 'Python', 'Ruby', 'Swift', 'Java', 'C#', 'SQL', 'PHP', 'C++', 'HTML/CSS', 'Frameworks', 'General'].map(text => (
             <ListItem button key={text}>
               <ListItemText primary={text} />
             </ListItem>
@@ -190,7 +191,8 @@ class ResponsiveDrawer extends React.Component {
           <div className={classes.toolbar} />
           {/* <Intro /> */}
           {/* <Login /> */}
-          <Register />
+          {/* <Register /> */}
+          <SubmitLink />
           {/* <IndividualLink /> */}
           {/* <LinkListPage /> */}
         </main>
