@@ -6,7 +6,8 @@ import { Menu, Search as SearchIcon } from '@material-ui/icons';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 
 // import { Intro } from '..';
-import { Login } from '..';
+// import { Login } from '..';
+import { Register } from '..';
 
 const drawerWidth = 240;
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
@@ -188,7 +189,8 @@ class ResponsiveDrawer extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {/* <Intro /> */}
-          <Login />
+          {/* <Login /> */}
+          <Register />
           {/* <IndividualLink /> */}
           {/* <LinkListPage /> */}
         </main>
