@@ -4,11 +4,12 @@ import { withStyles } from '@material-ui/core/styles';
 import { Divider, Drawer, AppBar, Button, Toolbar, CssBaseline, List, Typography, IconButton, Hidden, ListItem, ListItemText, InputBase } from '@material-ui/core';
 import { Menu, Search as SearchIcon } from '@material-ui/icons';
 import { fade } from '@material-ui/core/styles/colorManipulator';
+import { NavLink, Route, Switch, Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
-// import { Intro } from '..';
-// import { Login } from '..';
-// import { Register } from '..';
-import { SubmitLink } from '..';
+import { Intro, Login, Register, NoMatch, LinkListPage, IndividualLink, SubmitLink } from '..';
+
+import './Menu.scss';
 
 const drawerWidth = 240;
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
@@ -157,8 +158,27 @@ class ResponsiveDrawer extends React.Component {
                 }}
               />
             </div>
-            <Button color="inherit">Login</Button>
-            <Button color="inherit">Sign up</Button>
+            <Button>
+              <NavLink className="link" to="/login">Login</NavLink>
+            </Button>
+            <Button>
+              <NavLink className="link" to="/sign-up">Sign up</NavLink>
+            </Button>
+            <Button>
+              <NavLink className="link" to="/">Home</NavLink>
+            </Button>
+            <Button>
+              <NavLink className="link" to="/link">Link</NavLink>
+            </Button>
+            <Button>
+              <NavLink className="link" to="/link-list">Link List</NavLink>
+            </Button>
+            <Button>
+              <NavLink className="link" to="/link-submit">Submit Link</NavLink>
+            </Button>
+            <Button>
+              <NavLink className="link" to="/adasda">Error 404</NavLink>
+            </Button>
           </Toolbar>
         </AppBar>
         <nav className={classes.drawer}>
@@ -186,15 +206,19 @@ class ResponsiveDrawer extends React.Component {
             </Drawer>
           </Hidden>
         </nav>
-        {/* Add components here */}
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {/* <Intro /> */}
-          {/* <Login /> */}
-          {/* <Register /> */}
-          <SubmitLink />
-          {/* <IndividualLink /> */}
-          {/* <LinkListPage /> */}
+          <Router history={createBrowserHistory()}>
+            <Switch>
+              <Route exact path="/" component={Intro} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/sign-up" component={Register} />
+              <Route exact path="/link-list" component={LinkListPage} />
+              <Route exact path="/link-submit" component={SubmitLink} />
+              <Route exact path="/link" component={IndividualLink} />
+              <Route component={NoMatch} />
+            </Switch>
+          </Router>
         </main>
       </div>
     );
