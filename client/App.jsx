@@ -1,11 +1,17 @@
 import React from 'react';
-import { Menu } from './components';
+import { BrowserRouter } from 'react-router-dom';
+
+import { Content, SideBar, NavBar } from './components';
 import './App.scss';
 
 const app = () => (
-  <div className="App">
-    <Menu />
-  </div>
+  <BrowserRouter>
+    <div className="app">
+      <NavBar />
+      <SideBar />
+      <Content />
+    </div>
+  </BrowserRouter>
 );
 
 export default app;
