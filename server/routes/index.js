@@ -1,6 +1,6 @@
 const users = require('./users');
 const resources = require('./resources');
-const auth = require('./auth');
+const auth = require('./auth/');
 const comments = require('./comments');
 
 module.exports = (app) => {
