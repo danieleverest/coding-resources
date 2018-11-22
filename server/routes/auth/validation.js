@@ -3,19 +3,22 @@ const User = require('../../models/user');
 
 const alreadyTaken = field => async (value) => {
   return await User.findOne({ [field]: value })
-    ? Promise.reject(new Error(`${field} already taken`)) : Promise.resolve();
+    ? Promise.reject(new Error(`${field} already taken`))
+    : Promise.resolve();
 };
 
 const userExists = async (username) => {
   return await User.findOne({ username })
     ? Promise.resolve()
-    : Promise.reject(new Error('That username does not exist'));
-}
+    : Promise.reject();
+};
 
 const regValidation = [
   check('username')
     .trim()
     .escape()
+    .isAlphanumeric()
+    .withMessage('Username must be alphanumeric')
     .isLength({ min: 5 })
     .withMessage('Username must be longer than 5 characters')
     .isLength({ max: 25 })
@@ -45,7 +48,8 @@ const loginValidation = [
     .withMessage('Usernames are longer than 5 characters')
     .isLength({ max: 25 })
     .withMessage('Usernames are shorter than 25 characters')
-    .custom(userExists),
+    .custom(userExists)
+    .withMessage('That username does not exist'),
   check('password')
     .trim()
     .escape()
