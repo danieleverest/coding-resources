@@ -1,22 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
-import { SideBar, NavBar } from './components';
+import { BrowserRouter } from 'react-router-dom';
+
+import { Content, SideBar, NavBar } from './components';
 import './App.scss';
 
 const app = () => (
   <BrowserRouter>
-    <Switch>
-      <div className="App">
-        <NavBar />
-        <SideBar />
-        {/* <main>
-
-        </main> */}
-      </div>
-    </Switch>
+    <div className="app">
+      <NavBar />
+      <SideBar />
+      <Content />
+    </div>
   </BrowserRouter>
 );
 
 export default app;
-
-{/* <Route path="/" exact component={SideBar} /> */}

@@ -1,25 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Divider, List, ListItem, ListItemText, InputBase, Drawer, Hidden } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { 
-  Divider, 
-  Drawer, 
-  CssBaseline, 
-  List, 
-  Hidden, 
-  ListItem, 
-  ListItemText, 
-  InputBase } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
 import { fade } from '@material-ui/core/styles/colorManipulator';
-
-import './SideBar.scss';
 
 const drawerWidth = 240;
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 const styles = theme => ({
-  root: { display: 'flex' },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
@@ -30,7 +19,7 @@ const styles = theme => ({
     marginRight: 20,
     [theme.breakpoints.up('sm')]: { display: 'none' },
   },
- 
+
   grow: { flexGrow: 1 },
   languagebar: { textAlign: 'center' },
   search: {
@@ -46,9 +35,7 @@ const styles = theme => ({
     },
   },
   toolbar: theme.mixins.toolbar,
-  drawerPaper: { 
-    width: drawerWidth,
-  },
+  drawerPaper: { width: drawerWidth },
   searchIcon: {
     width: theme.spacing.unit * 9,
     height: '100%',
@@ -76,7 +63,7 @@ const styles = theme => ({
   },
 });
 
-class SideBar extends React.Component {
+class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = { mobileOpen: false };
@@ -128,42 +115,34 @@ class SideBar extends React.Component {
     );
 
     return (
-      <div className={classes.root}>
-        <CssBaseline />
-        <nav className={classes.drawer}>
-          {/* The implementation can be swap with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={this.handleDrawerToggle}
-              classes={{ paper: classes.drawerPaper }}
-              ModalProps={{ keepMounted: true }}
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{ paper: classes.drawerPaper }}
-              variant="permanent"
-              open
-            >
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-      </div>
+      <nav className={classes.drawer}>
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={mobileOpen}
+            onClose={this.handleDrawerToggle}
+            classes={{ paper: classes.drawerPaper }}
+            ModalProps={{ keepMounted: true }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer classes={{ paper: classes.drawerPaper }} variant="permanent" open>
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
     );
   }
 }
 
-SideBar.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+Sidebar.propTypes = {
   container: PropTypes.shape({}),
-  theme: PropTypes.shape({}).isRequired,
+  theme: PropTypes.shape({}),
+  classes: PropTypes.shape({}),
 };
 
-export default withStyles(styles, { withTheme: true })(SideBar);
+export default withStyles(styles, { withTheme: true })(Sidebar);
