@@ -64,10 +64,8 @@ const api = {
    */
   getResources: async (category = undefined) => {
     try {
-      const res = await API.get('/resources');
-      // would be better to do this filter on the server
-      if (!category) return res.data.resources;
-      return res.data.resources.filter(resource => resource.category === category);
+      const res = await API.get('/resources', { category });
+      return res.data;
     } catch (error) {
       return error.response.data;
     }
@@ -96,7 +94,7 @@ const api = {
    * @param {string} [resource.desc]
    * @returns {Promise}
    */
-  submitResource: async ({ name, link, category, desc }) => {
+  submitResource: async ({ name, link, category, desc = '' }) => {
     try {
       const res = await API.post('/resources', { name, link, category, desc });
       return res.data;

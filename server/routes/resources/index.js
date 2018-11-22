@@ -3,7 +3,7 @@ const { loginRequired } = require('../../auth');
 
 const {
   getCategories,
-  getAllResources,
+  getResources,
   getOneResource,
   newResource,
   editResource,
@@ -15,7 +15,7 @@ const {
 } = require('./validation');
 
 router.get('/categories', getCategories);
-router.get('/', getAllResources);
+router.get('/', getResources);
 router.get('/:id', getOneResource);
 router.post('/', loginRequired, newResourceValidation, newResource);
 router.put('/:id', loginRequired, editResource);

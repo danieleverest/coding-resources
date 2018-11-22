@@ -5,9 +5,12 @@ const categories = require('./categories');
 
 const getCategories = async (req, res) => res.status(200).json({ categories });
 
-const getAllResources = async (req, res) => {
+const getResources = async (req, res) => {
   try {
-    const resources = await Resource.find({});
+    const { category } = req.body;
+    const resources = category
+      ? await Resource.find({ category })
+      : await Resource.find({});
     res.status(200).json({
       success: true,
       resources,
@@ -110,7 +113,7 @@ const deleteResource = async (req, res) => {
 
 module.exports = {
   getCategories,
-  getAllResources,
+  getResources,
   getOneResource,
   newResource,
   editResource,
