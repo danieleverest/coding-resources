@@ -1,18 +1,22 @@
 import React from 'react';
-
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import { Menu } from './components';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { SideBar, NavBar } from './components';
 import './App.scss';
 
 const app = () => (
   <BrowserRouter>
     <Switch>
       <div className="App">
-        <Route path="/" exact component={Menu} />
+        <NavBar />
+        <SideBar />
+        {/* <main>
+
+        </main> */}
       </div>
     </Switch>
   </BrowserRouter>
 );
 
 export default app;
+
+{/* <Route path="/" exact component={SideBar} /> */}
