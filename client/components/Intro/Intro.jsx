@@ -8,6 +8,10 @@ import Divider from '@material-ui/core/Divider';
 import './Intro.scss';
 import image from './image.jpg';
 
+// Adding styles
+// no changes, still same issue
+// content is not being responsive
+
 const styles = theme => ({
   test: {
     display: 'flex',
