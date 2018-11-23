@@ -6,11 +6,13 @@ import './App.scss';
 
 const app = () => (
   <BrowserRouter>
-    <div className="app">
-      <NavBar />
-      <SideBar />
-      <Content />
-    </div>
+{/* Wrapping SideBar */}
+    <SideBar>
+      <div className="app">
+        <NavBar />
+        <Content />
+      </div>
+    </SideBar>
   </BrowserRouter>
 );
 
