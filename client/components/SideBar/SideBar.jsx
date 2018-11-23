@@ -76,7 +76,7 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    const { classes, theme, container } = this.props;
+    const { classes, theme, container, children } = this.props;
     const { mobileOpen } = this.state;
 
     const drawer = (
@@ -134,6 +134,9 @@ class Sidebar extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
+      
+{/* calling child components */}
+        {children}
       </nav>
     );
   }
@@ -143,6 +146,7 @@ Sidebar.propTypes = {
   container: PropTypes.shape({}),
   theme: PropTypes.shape({}),
   classes: PropTypes.shape({}),
+  children: PropTypes.shape({}),
 };
 
 export default withStyles(styles, { withTheme: true })(Sidebar);
