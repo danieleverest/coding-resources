@@ -6,7 +6,7 @@ import './App.scss';
 
 const app = () => (
   <BrowserRouter>
-{/* Wrapping SideBar */}
+{/* Using SideBar to wrap components */}
     <SideBar>
       <div className="app">
         <NavBar />
