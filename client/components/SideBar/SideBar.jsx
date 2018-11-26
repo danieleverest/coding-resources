@@ -120,7 +120,6 @@ class Sidebar extends React.Component {
           <Drawer
             container={container}
             variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={this.handleDrawerToggle}
             classes={{ paper: classes.drawerPaper }}
