@@ -22,6 +22,7 @@ const styles = theme => ({
     },
   },
 })
+})
 
 const navBar = (props) => {
   const { classes } = props;
