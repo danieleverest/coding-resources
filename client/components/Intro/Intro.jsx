@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
 
 import './Intro.scss';
 import image from './image.jpg';
@@ -18,6 +19,17 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     paddingRight: theme.spacing.unit * 2,
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    margin: 0,
+    paddingTop: '64px',
+    height: '100vh',
   },
   content: {
     flexGrow: 1,
@@ -34,22 +46,24 @@ const intro = (props) => {
   const { classes } = props;
 
   return (
-    <div className={classes.card}>
-      <Paper elevation={8}>
-        <img src={image} alt="pic" className={classes.media} />
-        <Typography variant="h5" align="center">
+    <Grid container>
+      <Grid item xs={12}>
+        <Paper className={classes.paper} elevation={8}>
+          <Typography variant="h5" align="center">
           Welcome to the Programming Reference Site
-        </Typography>
-        <Divider />
-        <br />
-        <Typography variant="subtitle1" className={classes.content}>
+          </Typography>
+          <img src={image} alt="pic" width="500px" className={classes.media} />
+          <Divider />
+          <br />
+          <Typography variant="subtitle1" className={classes.content}>
             This project was created to help individual programmers, ranging from begginer to advanced, to have a reference site, where specific links; githubs, articles, etc. are listed and recommended by programmers such as yourself!
             We understand the importance of using a search engine, but we also understand that there are so many resources out there, sometimes you don‘t know whether something worth your while or not!
             This website was created to help the individual programmers to find the best sources that are backed up by other programmers, who have looked into the references themselves!
             Please feel free to add any input on this ongoing project! We would love to hear your insight and improve the site!
-        </Typography>
-      </Paper>
-    </div>
+          </Typography>
+        </Paper>
+      </Grid>
+    </Grid>
   );
 };
 

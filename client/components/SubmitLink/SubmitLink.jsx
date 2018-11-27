@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { CssBaseline, Paper, TextField, Button, MenuItem, Input, InputLabel, FormControl, Select, Chip } from '@material-ui/core';
 import './SubmitLink.scss';
 
-
 // Adding styles
 const styles = theme => ({
   root: {
@@ -176,4 +175,3 @@ class SubmitLink extends Component {
 SubmitLink.propTypes = { classes: PropTypes.object.isRequired };
 
 export default withStyles(styles)(SubmitLink);
-
