@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Avatar, TextField, Button, Typography, Divider, FormHelperText, CssBaseline } from '@material-ui/core';
+import { Paper, Avatar, TextField, Button, Typography, Divider, CssBaseline } from '@material-ui/core';
 import AssignmentInd from '@material-ui/icons/AssignmentInd';
 import './Register.scss';
 import api from '../../api';
@@ -160,4 +160,3 @@ const Register = (props) => {
 Register.propTypes = { classes: PropTypes.object.isRequired };
 
 export default withStyles(styles)(Register);
-

@@ -163,12 +163,11 @@ Menu.propTypes = {
 
 export default withStyles(styles, { withTheme: true })(Menu);
 
-
 // Search Code
 // Thinking of adding search input somewhere else
 // add code inside of render
 
-{/* <div className={classes.grow} />
+{ /* <div className={classes.grow} />
 <div className={classes.search}>
 <div className={classes.searchIcon}>
   <SearchIcon />
@@ -180,5 +179,5 @@ export default withStyles(styles, { withTheme: true })(Menu);
     input: classes.inputInput,
   }}
 />
-</div> 
-<Divider /> */}
+</div>
+<Divider /> */ }
