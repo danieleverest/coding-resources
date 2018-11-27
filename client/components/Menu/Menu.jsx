@@ -2,45 +2,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider, List, ListItem, ListItemText, InputBase, Drawer, Hidden, CssBaseline, Toolbar, IconButton } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Search as SearchIcon } from '@material-ui/icons';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import MenuIcon from '@material-ui/icons/Menu';
+// import { fade } from '@material-ui/core/styles/colorManipulator';
+
+// Search
+// import { Search as SearchIcon } from '@material-ui/icons';
+// import { fade } from '@material-ui/core/styles/colorManipulator';
+
+// Menu
+// import MenuIcon from '@material-ui/icons/Menu';
 
 import './Menu.scss';
 
-const drawerWidth = 240;
+const drawerWidth = 220;
 
 const styles = theme => ({
   root: { display: 'flex' },
 
   // MenuButton
-  menuButton: {
-    marginRight: 20,
-    [theme.breakpoints.up('sm')]: { display: 'none' },
-  },
+  // menuButton: {
+  //   marginRight: 20,
+  //   [theme.breakpoints.up('sm')]: { display: 'none' },
+  // },
 
   // Search bar
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': { backgroundColor: fade(theme.palette.common.white, 0.25) },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit,
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  // search: {
+  //   position: 'relative',
+  //   borderRadius: theme.shape.borderRadius,
+  //   backgroundColor: fade(theme.palette.common.white, 0.15),
+  //   '&:hover': { backgroundColor: fade(theme.palette.common.white, 0.25) },
+  //   marginLeft: 0,
+  //   width: '100%',
+  //   [theme.breakpoints.up('sm')]: {
+  //     marginLeft: theme.spacing.unit,
+  //     width: 'auto',
+  //   },
+  // },
+  // searchIcon: {
+  //   width: theme.spacing.unit * 9,
+  //   height: '100%',
+  //   position: 'absolute',
+  //   pointerEvents: 'none',
+  //   display: 'flex',
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
 
   // Menu Drawer
   drawer: {
@@ -93,20 +98,9 @@ class Menu extends React.Component {
     const drawer = (
       <div>
         <div className={classes.toolbar} />
-        <div className={classes.grow} />
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-          />
-        </div>
-        <Divider />
+
+        {/* add search code here */}
+
         <List className={classes.languagebar}>
           {['JavaScript', 'Python', 'Ruby', 'Swift', 'Java', 'C#', 'SQL', 'PHP', 'C++', 'HTML/CSS', 'Frameworks', 'General'].map(text => (
             <ListItem button key={text}>
@@ -142,7 +136,7 @@ class Menu extends React.Component {
           <Hidden smUp implementation="css">
             <Drawer
               container={container}
-              variant="temporary"
+              variant="permanent"
               open={mobileOpen}
               onClose={this.handleDrawerToggle}
               classes={{ paper: classes.drawerPaper }}
@@ -169,44 +163,22 @@ Menu.propTypes = {
 
 export default withStyles(styles, { withTheme: true })(Menu);
 
-// const Menu = (props) => {
-//   const { classes } = props;
 
-//   return (
-//     <div className={classes.root}>
-//       <CssBaseline />
-//        <Drawer
-//        className={classes.drawer}
-//         variant="permanent"
-//         classes={{
-//           paper: classes.drawerPaper,
-//         }}
-//       >
-//         <div className={classes.toolbar} />
-//         <List>
-//           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-//             <ListItem button key={text}>
-//               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-//               <ListItemText primary={text} />
-//             </ListItem>
-//           ))}
-//         </List>
-//         <Divider />
-//         <List>
-//           {['All mail', 'Trash', 'Spam'].map((text, index) => (
-//             <ListItem button key={text}>
-//               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-//               <ListItemText primary={text} />
-//             </ListItem>
-//           ))}
-//         </List>
-//       </Drawer>
-//     </div>
-//   );
-// }
+// Search Code
+// Thinking of adding search input somewhere else
+// add code inside of render
 
-// Menu.propTypes = {
-//   classes: PropTypes.object.isRequired,
-// };
-
-// export default withStyles(styles)(Menu);
+{/* <div className={classes.grow} />
+<div className={classes.search}>
+<div className={classes.searchIcon}>
+  <SearchIcon />
+</div>
+<InputBase
+  placeholder="Search…"
+  classes={{
+    root: classes.inputRoot,
+    input: classes.inputInput,
+  }}
+/>
+</div> 
+<Divider /> */}
