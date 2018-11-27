@@ -13,32 +13,36 @@ import image from './image.jpg';
 // content is not being responsive
 
 const styles = theme => ({
-  test: {
-    display: 'flex',
-  },
-  root: {
+  card: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
+    textAlign: 'center',
   },
-  toolbar: theme.mixins.toolbar,
+  media: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 const intro = (props) => {
   const { classes } = props;
 
   return (
-    <div className={classes.test}>
-      <Paper className={classes.root} elevation={1}>
-        <Typography variant="h5" style={{ marginBottom: '10px' }}>Welcome to the Programming Reference Site</Typography>
-        <img src={image} alt="pic" />
+    <div className={classes.card}>
+      <Paper elevation={8}>
+        <img src={image} alt="pic" className={classes.media} />
+        <Typography variant="h5" align="center">
+          Welcome to the Programming Reference Site
+        </Typography>
         <Divider />
         <br />
-        <Typography variant="subtitle1">
+        <Typography variant="subtitle1" className={classes.content}>
             This project was created to help individual programmers, ranging from begginer to advanced, to have a reference site, where specific links; githubs, articles, etc. are listed and recommended by programmers such as yourself!
             We understand the importance of using a search engine, but we also understand that there are so many resources out there, sometimes you don‘t know whether something worth your while or not!
             This website was created to help the individual programmers to find the best sources that are backed up by other programmers, who have looked into the references themselves!

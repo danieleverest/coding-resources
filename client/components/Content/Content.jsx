@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
-
 import { Intro, Login, Register, LinkListPage, SubmitLink, IndividualLink, NoMatch } from '..';
 
 // Notes
