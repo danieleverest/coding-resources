@@ -5,8 +5,8 @@ module.exports.resolve = { extensions: ['.js', '.jsx'] };
 module.exports.entry = { filename: './client/index.js' };
 
 module.exports.devServer = {
+  historyApiFallback: true,
   contentBase: './dist',
-  proxy: { '/api': 'http://localhost:5000' },
 };
 
 module.exports.output = { filename: 'main.js' };

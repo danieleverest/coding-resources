@@ -6,13 +6,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import './NavBar.scss';
 
 class MenuAppBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      auth: true,
-      anchorEl: null,
-    };
-  }
+  state = {
+    auth: true,
+    anchorEl: null,
+  };
 
   handleChange = (event) => {
     this.setState({ auth: event.target.checked });
@@ -36,7 +33,12 @@ class MenuAppBar extends React.Component {
           <Typography variant="h6" color="inherit" className="grow">Programming Reference Site</Typography>
           {auth && (
           <div>
-            <IconButton aria-owns={open ? 'menu-appbar' : undefined} aria-haspopup="true" onClick={this.handleMenu} color="inherit">
+            <IconButton
+              aria-owns={open ? 'menu-appbar' : undefined}
+              aria-haspopup="true"
+              onClick={this.handleMenu}
+              color="inherit"
+            >
               <MenuIcon />
             </IconButton>
             <Menu
@@ -53,13 +55,27 @@ class MenuAppBar extends React.Component {
               open={open}
               onClose={this.handleClose}
             >
-              <MenuItem><NavLink to="/login">Login</NavLink></MenuItem>
-              <MenuItem><NavLink to="/sign-up">Sign up</NavLink></MenuItem>
-              <MenuItem><NavLink to="/">Home</NavLink></MenuItem>
-              <MenuItem><NavLink to="/link">Link</NavLink></MenuItem>
-              <MenuItem><NavLink to="/link-list">Link List</NavLink></MenuItem>
-              <MenuItem><NavLink to="/link-submit">Submit Link</NavLink></MenuItem>
-              <MenuItem><NavLink to="/adasda">Error 404</NavLink></MenuItem>
+              <MenuItem>
+                <NavLink to="/login">Login</NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="/sign-up">Sign up</NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="/">Home</NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="/link">Link</NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="/link-list">Link List</NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="/link-submit">Submit Link</NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to="/adasda">Error 404</NavLink>
+              </MenuItem>
             </Menu>
           </div>
           )}

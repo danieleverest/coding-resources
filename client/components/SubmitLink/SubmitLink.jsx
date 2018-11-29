@@ -47,7 +47,7 @@ class SubmitLink extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <form action="/submit" method="POST">
           <div>
             <TextField
@@ -150,7 +150,7 @@ class SubmitLink extends Component {
             </Button>
           </div>
         </form>
-      </React.Fragment>
+      </>
     );
   }
 }

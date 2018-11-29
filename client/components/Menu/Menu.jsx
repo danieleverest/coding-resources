@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
+import api from '../../api';
 import { List, ListItem, ListItemText, Grid, Paper } from '@material-ui/core';
 import { Route, Switch } from 'react-router-dom';
 
@@ -10,34 +11,26 @@ import { Intro, Login, Register, LinkListPage, SubmitLink, IndividualLink, NoMat
 const mql = window.matchMedia('(min-width: 800px)');
 
 class Menu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sidebarDocked: mql.matches,
-      sidebarOpen: false,
-    };
+  state = {
+    sidebarDocked: mql.matches,
+    sidebarOpen: false,
+  };
 
-    this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
-
-  componentWillMount() {
+  componentDidMount() {
     mql.addListener(this.mediaQueryChanged);
   }
 
-  componentWillUnmount() {
+  async componentWillUnmount() {
     const { mql: mqlState } = this.state;
-
     mqlState.removeListener(this.mediaQueryChanged);
   }
 
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
+  onSetSidebarOpen = open => this.setState({ sidebarOpen: open })
 
-  mediaQueryChanged() {
-    this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
-  }
+  mediaQueryChanged = () => this.setState({
+    sidebarDocked: mql.matches,
+    sidebarOpen: false,
+  })
 
   render() {
     const { sidebarOpen, sidebarDocked } = this.state;

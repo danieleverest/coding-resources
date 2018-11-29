@@ -24,7 +24,6 @@ const individualLink = () => (
       </div>
     </div>
   </div>
-
 );
 
 export default individualLink;

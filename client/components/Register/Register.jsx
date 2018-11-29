@@ -25,7 +25,6 @@ const Register = () => {
         password,
       })
         .then((res) => {
-          console.log(res);
           form.reset();
         })
         .catch(err => console.error(err));
@@ -33,7 +32,7 @@ const Register = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Avatar><AssignmentInd /></Avatar>
       <form onSubmit={register}>
         <div>
@@ -101,7 +100,7 @@ const Register = () => {
         <Typography variant="h6" className="form-spacer">Already have an account?</Typography>
         <Button type="submit" variant="contained" color="secondary">Log In </Button>
       </form>
-    </React.Fragment>
+    </>
   );
 };
 
