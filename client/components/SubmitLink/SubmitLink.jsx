@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { TextField, Button, MenuItem, Input, InputLabel, FormControl, Select, Chip } from '@material-ui/core';
+
 import './SubmitLink.scss';
 
-// Should be pulled from database
 const categories = [
   { value: 'JavaScript', label: 'JavaScript' },
   { value: 'Python', label: 'Python' },
@@ -18,7 +18,6 @@ const categories = [
   { value: 'General', label: 'General' },
 ];
 
-// To be pulled from database
 const tags = [
   'OOP',
   'ES5',
@@ -48,7 +47,7 @@ class SubmitLink extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <form action="/submit" method="POST">
           <div>
             <TextField
@@ -147,11 +146,11 @@ class SubmitLink extends Component {
               variant="contained"
               color="primary"
             >
-              Submit Link
+                Submit Link
             </Button>
           </div>
         </form>
-      </div>
+      </>
     );
   }
 }

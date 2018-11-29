@@ -1,10 +1,12 @@
 import React from 'react';
-import { TextField, Button, Typography, Divider, FormHelperText } from '@material-ui/core';
+
+import { Avatar, TextField, Button, Typography, Divider } from '@material-ui/core';
+import AssignmentInd from '@material-ui/icons/AssignmentInd';
+
 import './Register.scss';
 import api from '../../api';
 
 const Register = () => {
-
   const register = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,7 +25,6 @@ const Register = () => {
         password,
       })
         .then((res) => {
-          console.log(res);
           form.reset();
         })
         .catch(err => console.error(err));
@@ -31,7 +32,8 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <>
+      <Avatar><AssignmentInd /></Avatar>
       <form onSubmit={register}>
         <div>
           <TextField
@@ -90,33 +92,15 @@ const Register = () => {
             variant="outlined"
           />
         </div>
-        <div>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-          >
-            Register Account
-          </Button>
-        </div>
+        <div><Button type="submit" variant="contained" color="primary">Register Account</Button></div>
+        <br />
       </form>
       <Divider className="form-spacer" />
       <form method="GET" action="/login">
-        <Typography
-          variant="h6"
-          className="form-spacer"
-        >
-          Already have an account?
-        </Typography>
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-        >
-          Log In
-        </Button>
+        <Typography variant="h6" className="form-spacer">Already have an account?</Typography>
+        <Button type="submit" variant="contained" color="secondary">Log In </Button>
       </form>
-    </div>
+    </>
   );
 };
 

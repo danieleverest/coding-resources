@@ -1,9 +1,17 @@
 import React from 'react';
-import { TextField, Button, Typography, Divider } from '@material-ui/core';
+import { Checkbox, Avatar, TextField, Button, Typography, Divider, FormControlLabel } from '@material-ui/core';
+import LockIcon from '@material-ui/icons/LockOutlined';
+
 import './Login.scss';
 
 const login = () => (
-  <div>
+  <>
+    <Avatar>
+      <LockIcon />
+    </Avatar>
+    <Typography component="h1" variant="h5">
+      Sign in
+    </Typography>
     <form action="/login" method="POST">
       <div>
         <TextField
@@ -34,18 +42,24 @@ const login = () => (
         <Button
           type="submit"
           variant="contained"
-          color="primary"
-        >
-          Log In
+          color="primary">
+            Log In
         </Button>
       </div>
     </form>
+
     <Divider className="form-spacer" />
     <form method="GET" action="/register">
-      <Typography
-        variant="h6"
-        className="form-spacer"
-      >
+      <FormControlLabel
+        control={(
+          <Checkbox
+            value="remember"
+            color="primary"
+          />
+        )}
+        label="Remember me"
+      />
+      <Typography variant="h6" className="form-spacer">
         Don&apos;t have an account?
       </Typography>
       <Button
@@ -56,7 +70,7 @@ const login = () => (
         Register
       </Button>
     </form>
-  </div>
+  </>
 );
 
 export default login;
