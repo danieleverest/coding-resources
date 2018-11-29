@@ -3,22 +3,7 @@ import { TextField, Button, MenuItem, Input, InputLabel, FormControl, Select, Ch
 
 import './SubmitLink.scss';
 
-const categories = [
-  { value: 'JavaScript', label: 'JavaScript' },
-  { value: 'Python', label: 'Python' },
-  { value: 'Ruby', label: 'Ruby' },
-  { value: 'Swift', label: 'Swift' },
-  { value: 'Java', label: 'Java' },
-  { value: 'C#', label: 'C#' },
-  { value: 'SQL', label: 'SQL' },
-  { value: 'PHP', label: 'PHP' },
-  { value: 'C++', label: 'C++' },
-  { value: 'HTML/CSS', label: 'HTML/CSS' },
-  { value: 'Frameworks', label: 'Frameworks' },
-  { value: 'General', label: 'General' },
-];
-
-const tags = [
+const defaultTags = [
   'OOP',
   'ES5',
   'Sorts',
@@ -46,9 +31,12 @@ class SubmitLink extends Component {
   };
 
   render() {
+    const { categories } = this.props;
+    const { tags, category } = this.state;
+
     return (
       <>
-        <form action="/submit" method="POST">
+        <form>
           <div>
             <TextField
               required
@@ -77,16 +65,16 @@ class SubmitLink extends Component {
               id="outlined-select-currency"
               select
               label="Select Category"
-              value={this.state.category}
+              value={category}
               style={{ width: 700 }}
               onChange={this.updateCategoryListValue('category')}
               helperText="Please select the most appropriate category"
               margin="normal"
               variant="outlined"
             >
-              {categories.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
+              {categories.map(cat => (
+                <MenuItem key={cat} value={cat}>
+                  {cat}
                 </MenuItem>
               ))}
             </TextField>
@@ -96,7 +84,7 @@ class SubmitLink extends Component {
               <InputLabel htmlFor="select-multiple-chip">Tags</InputLabel>
               <Select
                 multiple
-                value={this.state.tags}
+                value={tags}
                 onChange={this.addTag}
                 input={<Input id="select-multiple-chip" />}
                 variant="outlined"
@@ -109,7 +97,7 @@ class SubmitLink extends Component {
                   </div>
                 )}
               >
-                {tags.map(tag => (
+                {defaultTags.map(tag => (
                   <MenuItem key={tag} value={tag}>
                     {tag}
                   </MenuItem>

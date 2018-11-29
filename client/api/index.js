@@ -63,10 +63,10 @@ const api = {
    */
   getCategories: async () => {
     try {
-      const res = API.get('/resources/categories');
+      const res = await API.get('/resources/categories');
       return res.data;
     } catch (error) {
-      return error.response.data;
+      return ({ categories: ['Fetch error'] });
     }
   },
   /**

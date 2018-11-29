@@ -1,6 +1,14 @@
 module.exports = [
   'JavaScript',
-  'C++',
-  'Java',
   'Python',
+  'Ruby',
+  'Swift',
+  'Java',
+  'C#',
+  'SQL',
+  'PHP',
+  'C++',
+  'HTML/CSS',
+  'Frameworks',
+  'General',
 ];

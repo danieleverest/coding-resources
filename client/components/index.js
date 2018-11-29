@@ -8,4 +8,4 @@ export { default as NoMatch } from './NoMatch/NoMatch';
 export { default as Register } from './Register/Register';
 export { default as Main } from './Main/Main';
 export { default as SubmitLink } from './SubmitLink/SubmitLink';
-export { default as Sidebar } from './Sidebar/Sidebar';
+export { default as Categories } from './Categories/Categories';
