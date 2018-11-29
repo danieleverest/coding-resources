@@ -1,4 +1,3 @@
-export { default as Content } from './Content/Content';
 export { default as Footer } from './Footer/Footer';
 export { default as IndividualLink } from './IndividualLink/IndividualLink';
 export { default as Intro } from './Intro/Intro';
