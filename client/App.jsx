@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { NavBar, Menu } from './components';
+import { NavBar, Main } from './components';
 import './App.scss';
 
 const app = () => (
   <BrowserRouter>
     <>
       <NavBar />
-      <Menu />
+      <Main />
     </>
   </BrowserRouter>
 );
