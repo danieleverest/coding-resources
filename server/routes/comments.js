@@ -3,22 +3,8 @@ const { loginRequired } = require('../auth');
 const Comment = require('../models/comment');
 const Resource = require('../models/resource');
 
-/**
- * Returns array of comments for resource
- * @public GET /resources/:resource_id/comments
- */
 router.get('/', getAllComments);
-
-/**
- * Returns a single comment
- * @public GET /resources/:resource_id/comments/:comment_id
- */
 router.get('/:comment_id', getOneComment);
-
-/**
- * Submit a comment
- * @private POST /resources/:resource_id/comments
- */
 router.post('/', loginRequired, submitComment);
 
 // Route functions
@@ -29,17 +15,21 @@ async function getAllComments(req, res) {
       success: true,
       comments,
     });
-  } catch ({ message }) {
+  } catch (error) {
+    console.log(JSON.stringify(error, Object.getOwnPropertyNames(error))
+    )
     res.json({
       success: false,
-      message,
+      error: JSON.stringify(error, Object.getOwnPropertyNames(error)),
     });
   }
 }
 
 async function getOneComment(req, res) {
   try {
-    const comment = await Comment.findById(req.params.comment_id);
+    const comment = await Comment
+      .findById(req.params.comment_id)
+      .populate('author', 'username');
     res.json({
       success: true,
       comment,

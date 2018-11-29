@@ -35,15 +35,17 @@ async function login(req, res) {
       const { username, password } = req.body;
       const user = await User.findOne({ username });
       const pwIsValid = await user.checkPassword(password);
+
       // Password incorrect
-      if (!pwIsValid) throw new Error('Password is incorrect');
+      if (!pwIsValid) throw new Error('Password is incorrect').message;
+
       // Password correct
       user.login(res);
     }
   } catch (errors) {
     res.json({
       success: false,
-      errors: errors.message,
+      errors,
     });
   }
 }
