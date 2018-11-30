@@ -6,12 +6,14 @@ import { ThumbUp } from '@material-ui/icons';
 
 import './Links.scss';
 
-const link = ({ url, title, tags, votes }) => (
+const link = ({ url, title, desc, tags, votes }) => (
   <>
-    <div className="alignCenter">
-      <a href={url} className="linksLink">{title}</a>
+    <h3>{ title }</h3>
+    <div>
+      <a href={url} className="linksLink">{url}</a>
     </div>
-    <div className="alignCenter">
+    <p>{ desc }</p>
+    <div>
       {tags.map(tag => (
         <Chip
           key={tag}
@@ -28,6 +30,7 @@ const link = ({ url, title, tags, votes }) => (
 link.propTypes = {
   url: PropTypes.string,
   title: PropTypes.string,
+  desc: PropTypes.string,
   tags: PropTypes.array,
   votes: PropTypes.number,
 };
