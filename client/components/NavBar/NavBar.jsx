@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import NavButton from './NavButton';
@@ -8,7 +8,10 @@ import NavButton from './NavButton';
 import './NavBar.scss';
 
 class MenuAppBar extends React.Component {
-  static propTypes = { loggedIn: PropTypes.bool };
+  static propTypes = {
+    isLoggedIn: PropTypes.bool,
+    setLogout: PropTypes.func,
+  };
 
   state = { anchorEl: null };
 
@@ -19,7 +22,7 @@ class MenuAppBar extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-    const { loggedIn } = this.props;
+    const { isLoggedIn, setLogout } = this.props;
 
     return (
       <AppBar position="static">
@@ -30,10 +33,8 @@ class MenuAppBar extends React.Component {
             </NavButton>
           </Typography>
           {
-            loggedIn ? (
-              <Button onClick={this.handleClick}>
-                Log Out
-              </Button>
+            isLoggedIn ? (
+              <NavButton link="/" onClick={setLogout}>Log Out</NavButton>
             ) : (
               <>
                 <NavButton link="/login">Log In</NavButton>

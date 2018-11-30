@@ -4,50 +4,39 @@ import { NavBar, Main, Categories } from './components';
 import api from './api';
 import './App.scss';
 
-const mql = window.matchMedia('(min-width: 600px)');
-
 class App extends React.Component {
   state = {
-    sidebarDocked: mql.matches,
-    sidebarOpen: true,
     categories: [],
-    loggedIn: false,
+    isLoggedIn: false,
   };
 
   async componentDidMount() {
     const { categories } = await api.getCategories();
     this.setState({ categories });
-    mql.addListener(this.mediaQueryChanged);
   }
 
-  componentWillUnmount() {
-    mql.removeListener(this.mediaQueryChanged);
-  }
+  setLogin = () => this.setState({ isLoggedIn: true });
 
-  onSetSidebarOpen = open => this.setState({ sidebarOpen: open })
-
-  mediaQueryChanged = () => this.setState({
-    sidebarDocked: mql.matches,
-    sidebarOpen: false,
-  })
+  setLogout = () => this.setState({ isLoggedIn: false });
 
   render() {
-    const { sidebarOpen, sidebarDocked, categories, loggedIn } = this.state;
+    const { categories, isLoggedIn } = this.state;
 
     return (
       <>
         <NavBar
-          loggedIn={loggedIn}
+          isLoggedIn={isLoggedIn}
+          setLogout={this.setLogout}
         />
         <Sidebar
           sidebar={<Categories categories={categories} />}
-          open={sidebarOpen}
-          docked={sidebarDocked}
-          onSetOpen={this.onSetSidebarOpen}
+          open
+          docked
           rootClassName="sidebarRoot"
         >
           <Main
             categories={categories}
+            setLogin={this.setLogin}
           />
         </Sidebar>
       </>

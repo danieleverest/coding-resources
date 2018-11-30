@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import './Main.scss';
 import {
@@ -11,11 +12,11 @@ import {
   NoMatch,
 } from '..';
 
-export default ({ categories }) => (
+const Main = ({ categories, setLogin }) => (
   <div className="main-content">
     <Switch>
       <Route exact path="/" component={Intro} />
-      <Route exact path="/login" component={Login} />
+      <Route exact path="/login" component={props => <Login {...props} setLogin={setLogin} /> } />
       <Route exact path="/register" component={Register} />
       <Route exact path="/link-list" component={LinkListPage} />
       <Route
@@ -28,3 +29,11 @@ export default ({ categories }) => (
     </Switch>
   </div>
 );
+
+Main.propTypes = {
+  categories: PropTypes.array,
+  login: PropTypes.func,
+  logout: PropTypes.func,
+}
+
+export default Main;

@@ -40,9 +40,9 @@ const api = {
       });
       API.defaults.headers.common.Authorization = `Bearer ${res.data.token}`;
 
-      return res.data;
+      return true;
     } catch (error) {
-      return error.response.data;
+      return false;
     }
   },
   /**

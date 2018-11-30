@@ -10,22 +10,40 @@ import {
   FormControlLabel,
   Divider,
 } from '@material-ui/core';
+import api from '../../api';
 import './Login.scss';
 
-const login = () => (
+const Login = ({ setLogin, history }) => {
+
+  const login = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const {
+      username: { value: username },
+      password: { value: password },
+    } = form.elements;
+    const credentials = { username, password };
+    const success = await api.login(credentials);
+    if (success) {
+      setLogin();
+      history.push('/');
+    }
+  };
+
+  return (
   <>
     <Avatar>
       <LockIcon />
     </Avatar>
-    <form>
+    <form onSubmit={login}>
       <div>
         <TextField
-          id="email"
-          label="Email"
+          id="username"
+          label="username"
           className="form-row"
-          type="email"
-          name="email"
-          autoComplete="email"
+          type="text"
+          name="username"
+          autoComplete="username"
           margin="normal"
           variant="outlined"
         />
@@ -36,13 +54,17 @@ const login = () => (
           label="Password"
           className="form-row"
           type="password"
-          autoComplete="current-password"
+          autoComplete="password"
           margin="normal"
           variant="outlined"
         />
       </div>
       <div>
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+        >
           Log In
         </Button>
       </div>
@@ -66,6 +88,7 @@ const login = () => (
       </Link>
     </Button>
   </>
-);
+  );
+};
 
-export default login;
+export default Login;
