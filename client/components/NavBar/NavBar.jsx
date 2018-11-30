@@ -1,84 +1,81 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { AppBar, Toolbar, Typography, IconButton, MenuItem, Menu, Button } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
+import NavButton from './NavButton';
 
 import './NavBar.scss';
 
 class MenuAppBar extends React.Component {
-  state = {
-    auth: true,
-    anchorEl: null,
-  };
+  static propTypes = { loggedIn: PropTypes.bool };
 
-  handleChange = (event) => {
-    this.setState({ auth: event.target.checked });
-  };
+  state = { anchorEl: null };
 
-  handleMenu = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
+  handleClick = event => this.setState({ anchorEl: event.currentTarget });
 
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
+  handleClose = () => this.setState({ anchorEl: null })
 
   render() {
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const { loggedIn } = this.props;
 
     return (
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" color="inherit" className="grow">Programming Reference Site</Typography>
-          {auth && (
-          <div>
-            <IconButton
-              aria-owns={open ? 'menu-appbar' : undefined}
-              aria-haspopup="true"
-              onClick={this.handleMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={open}
-              onClose={this.handleClose}
-            >
-              <MenuItem>
-                <NavLink to="/login">Login</NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to="/sign-up">Sign up</NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to="/">Home</NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to="/link">Link</NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to="/link-list">Link List</NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to="/link-submit">Submit Link</NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink to="/adasda">Error 404</NavLink>
-              </MenuItem>
-            </Menu>
-          </div>
-          )}
+          <Typography variant="h6" color="inherit" className="grow">
+            <NavButton link="/">
+              Programming Reference Site
+            </NavButton>
+          </Typography>
+          {
+            loggedIn ? (
+              <Button onClick={this.handleClick}>
+                Log Out
+              </Button>
+            ) : (
+              <>
+                <NavButton link="/login">Log In</NavButton>
+                <NavButton link="/register">Sign Up</NavButton>
+              </>
+            )
+          }
+          <IconButton
+            aria-owns={open ? 'menu-appbar' : undefined}
+            aria-haspopup="true"
+            onClick={this.handleClick}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            onClose={this.handleClose}
+          >
+            <MenuItem>
+              <NavLink to="/link">Link</NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to="/link-list">Link List</NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to="/link-submit">Submit Link</NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to="/adasda">Error 404</NavLink>
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
     );

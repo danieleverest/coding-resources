@@ -11,6 +11,7 @@ class App extends React.Component {
     sidebarDocked: mql.matches,
     sidebarOpen: true,
     categories: [],
+    loggedIn: false,
   };
 
   async componentDidMount() {
@@ -31,11 +32,13 @@ class App extends React.Component {
   })
 
   render() {
-    const { sidebarOpen, sidebarDocked, categories } = this.state;
+    const { sidebarOpen, sidebarDocked, categories, loggedIn } = this.state;
 
     return (
       <>
-        <NavBar />
+        <NavBar
+          loggedIn={loggedIn}
+        />
         <Sidebar
           sidebar={<Categories categories={categories} />}
           open={sidebarOpen}
@@ -43,7 +46,9 @@ class App extends React.Component {
           onSetOpen={this.onSetSidebarOpen}
           rootClassName="sidebarRoot"
         >
-          <Main categories={categories} />
+          <Main
+            categories={categories}
+          />
         </Sidebar>
       </>
     );
