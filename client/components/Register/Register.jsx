@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { Avatar, TextField, Button, Typography, Divider } from '@material-ui/core';
+import {
+  Avatar,
+  TextField,
+  Button,
+  Typography,
+  Divider
+} from '@material-ui/core';
 import AssignmentInd from '@material-ui/icons/AssignmentInd';
 
 import './Register.scss';
@@ -15,25 +22,26 @@ const Register = () => {
       email: { value: email },
       emailConfirm: { value: emailConfirm },
       password: { value: password },
-      passwordConfirm: { value: passwordConfirm },
+      passwordConfirm: { value: passwordConfirm }
     } = form.elements;
 
     if (email === emailConfirm && password === passwordConfirm) {
-      api.register({
-        username,
-        email,
-        password,
-      })
-        .then((res) => {
-          form.reset();
+      api
+        .register({
+          username,
+          email,
+          password,
         })
+        .then(() => form.reset())
         .catch(err => console.error(err));
     }
   };
 
   return (
     <>
-      <Avatar><AssignmentInd /></Avatar>
+      <Avatar>
+        <AssignmentInd />
+      </Avatar>
       <form onSubmit={register}>
         <div>
           <TextField
@@ -92,14 +100,23 @@ const Register = () => {
             variant="outlined"
           />
         </div>
-        <div><Button type="submit" variant="contained" color="primary">Register Account</Button></div>
-        <br />
+        <div>
+          <Button type="submit" variant="contained" color="primary">
+            Register Account
+          </Button>
+        </div>
       </form>
+
       <Divider className="form-spacer" />
-      <form method="GET" action="/login">
-        <Typography variant="h6" className="form-spacer">Already have an account?</Typography>
-        <Button type="submit" variant="contained" color="secondary">Log In </Button>
-      </form>
+
+      <Typography variant="h6" className="form-spacer">
+        Already have an account?
+      </Typography>
+      <Button variant="contained" color="secondary">
+        <Link style={{ color: 'white', textDecoration: 'none' }} to="/login">
+          Log In
+        </Link>
+      </Button>
     </>
   );
 };
