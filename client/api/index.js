@@ -57,6 +57,19 @@ const api = {
     };
   },
   /**
+   * Fetch categories
+   * @public
+   * @returns {Promise} Array of categories
+   */
+  getCategories: async () => {
+    try {
+      const res = await API.get('/resources/categories');
+      return res.data;
+    } catch (error) {
+      return ({ categories: ['Fetch error'] });
+    }
+  },
+  /**
    * Fetch resources
    * @public
    * @param {string} [category]

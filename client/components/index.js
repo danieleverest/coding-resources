@@ -6,5 +6,6 @@ export { default as Login } from './Login/Login';
 export { default as NavBar } from './NavBar/NavBar';
 export { default as NoMatch } from './NoMatch/NoMatch';
 export { default as Register } from './Register/Register';
-export { default as Menu } from './Menu/Menu';
+export { default as Main } from './Main/Main';
 export { default as SubmitLink } from './SubmitLink/SubmitLink';
+export { default as Categories } from './Categories/Categories';

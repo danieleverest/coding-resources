@@ -25,8 +25,17 @@ const getResources = async (req, res) => {
 
 const getOneResource = async (req, res) => {
   try {
-    const resource = await Resource.findById(req.params.id);
-    if (!resource) throw new Error('Resource not found');
+    const resource = await Resource
+      .findById(req.params.id)
+      .populate({
+        path: 'comments',
+        select: {
+          path: 'author',
+          select: 'name',
+        },
+      })
+      //.populate('submittedBy');
+    if (!resource) throw new Error('Resource not found').message;
     res.status(200).json({
       success: true,
       resource,
@@ -71,8 +80,9 @@ const newResource = async (req, res) => {
 const editResource = async (req, res) => {
   try {
     const resource = await Resource.findById(req.params.id);
-    if (!resource) throw new Error('Resource not found');
-    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot edit resources you did not submit');
+
+    if (!resource) throw new Error('Resource not found').message;
+    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot edit resources you did not submit').message;
 
     const { update } = req.body;
     Object.assign(resource, update);
@@ -94,8 +104,9 @@ const editResource = async (req, res) => {
 const deleteResource = async (req, res) => {
   try {
     const resource = await Resource.findById(req.params.id);
-    if (!resource) throw new Error('Resource not found');
-    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot delete resources you did not submit');
+
+    if (!resource) throw new Error('Resource not found').message;
+    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot delete resources you did not submit').message;
 
     resource.delete();
 
