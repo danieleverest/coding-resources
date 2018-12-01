@@ -31,9 +31,9 @@ class ResourceList extends React.Component {
         ? resources.map(r => (
           <Links
             key={r._id}
+            id={r._id}
             title={r.name}
             url={r.link}
-            desc={r.desc}
             tags={r.tags}
             votes={r.rank}
           />
