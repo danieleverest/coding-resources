@@ -68,7 +68,7 @@ class MenuAppBar extends React.Component {
               <NavLink to="/link">Link</NavLink>
             </MenuItem>
             <MenuItem>
-              <NavLink to="/link-list">Link List</NavLink>
+              <NavLink to="/resources">Link List</NavLink>
             </MenuItem>
             <MenuItem>
               <NavLink to="/link-submit">Submit Link</NavLink>

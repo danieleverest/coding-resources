@@ -75,12 +75,13 @@ const api = {
    * @param {string} [category]
    * @returns {Promise} Array of resources
    */
-  getResources: async (category = undefined) => {
+  getResources: async (category) => {
+    const cat = category || 'all';
     try {
-      const res = await API.get('/resources', { category });
+      const res = await API.get(`/resources/c/${cat}`);
       return res.data;
     } catch (error) {
-      return error.response.data;
+      return error.response;
     }
   },
   /**

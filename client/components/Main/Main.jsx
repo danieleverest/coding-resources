@@ -9,23 +9,48 @@ import {
   LinkListPage,
   SubmitLink,
   IndividualLink,
-  NoMatch,
 } from '..';
 
 const Main = ({ categories, setLogin }) => (
   <div className="main-content">
     <Switch>
-      <Route exact path="/" component={Intro} />
-      <Route exact path="/login" component={props => <Login {...props} setLogin={setLogin} /> } />
-      <Route exact path="/register" component={Register} />
-      <Route exact path="/link-list" component={LinkListPage} />
+      <Route
+        path="/login"
+        component={props => (
+          <Login
+            {...props}
+            setLogin={setLogin}
+          />
+        )}
+      />
+      <Route
+        path="/register"
+        component={Register}
+      />
       <Route
         exact
-        path="/link-submit"
-        component={props => <SubmitLink {...props} categories={categories} />}
+        path="/resources"
+        component={LinkListPage}
       />
-      <Route exact path="/link" component={IndividualLink} />
-      <Route component={NoMatch} />
+      <Route
+        path="/link-submit"
+        component={props => (
+          <SubmitLink
+            {...props}
+            categories={categories}
+          />
+        )}
+      />
+      <Route
+        path="/link"
+        component={IndividualLink}
+      />
+      <Route
+        exact
+        path="/resources/:cat"
+        component={LinkListPage}
+      />
+      <Route path="/" component={Intro} />
     </Switch>
   </div>
 );
@@ -34,6 +59,6 @@ Main.propTypes = {
   categories: PropTypes.array,
   login: PropTypes.func,
   logout: PropTypes.func,
-}
+};
 
 export default Main;

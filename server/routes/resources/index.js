@@ -15,7 +15,7 @@ const {
 } = require('./validation');
 
 router.get('/categories', getCategories);
-router.get('/', getResources);
+router.get('/c/:category', getResources);
 router.get('/:id', getOneResource);
 router.post('/', loginRequired, newResourceValidation, newResource);
 router.put('/:id', loginRequired, editResource);
