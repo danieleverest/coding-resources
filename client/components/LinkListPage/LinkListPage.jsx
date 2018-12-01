@@ -1,34 +1,50 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Links from './Links/Links';
 import api from '../../api';
 import './LinkListPage.scss';
 
-class linkPage extends React.Component {
+class ResourceList extends React.Component {
   state = { resources: [] };
 
-  async componentDidMount() {
-    console.log(this.props.match);
-    const { resources } = await api.getResources();
+  componentDidMount() {
+    this.fetchResources();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { cat: prevCat } = prevProps.match.params;
+    const { cat: currCat } = this.props.match.params;
+    if (prevCat !== currCat) this.fetchResources();
+  }
+
+  async fetchResources() {
+    const { cat } = this.props.match.params;
+    const { resources } = await api.getResources(cat);
     this.setState({ resources });
   }
 
   render() {
     const { resources } = this.state;
     return (
-      <>
-        {resources.map(({ _id, name, link, desc, tags, rank }) => (
+    <>
+      {resources.length
+        ? resources.map(r => (
           <Links
-            key={_id}
-            title={name}
-            url={link}
-            desc={desc}
-            tags={tags}
-            votes={rank}
+            key={r._id}
+            title={r.name}
+            url={r.link}
+            desc={r.desc}
+            tags={r.tags}
+            votes={r.rank}
           />
-        ))}
-      </>
+        ))
+        : <div>Nothing found</div>
+      }
+    </>
     );
   }
 }
 
-export default linkPage;
+ResourceList.propTypes = { match: PropTypes.any };
+
+export default ResourceList;

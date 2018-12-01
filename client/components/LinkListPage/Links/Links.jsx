@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import { Button, Chip, Avatar } from '@material-ui/core';
 import { ThumbUp } from '@material-ui/icons';
@@ -35,4 +36,4 @@ link.propTypes = {
   votes: PropTypes.number,
 };
 
-export default link;
+export default withRouter(link);

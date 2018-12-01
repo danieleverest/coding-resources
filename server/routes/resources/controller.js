@@ -6,11 +6,11 @@ const categories = require('./categories');
 const getCategories = async (req, res) => res.status(200).json({ categories });
 
 const getResources = async (req, res) => {
+  const { category } = req.params;
   try {
-    const { category } = req.body;
-    const resources = category
-      ? await Resource.find({ category })
-      : await Resource.find({});
+    const resources = (category === 'all')
+      ? await Resource.find()
+      : await Resource.find({ category });
     res.status(200).json({
       success: true,
       resources,
@@ -33,8 +33,8 @@ const getOneResource = async (req, res) => {
           path: 'author',
           select: 'name',
         },
-      })
-      //.populate('submittedBy');
+      });
+    // .populate('submittedBy');
     if (!resource) throw new Error('Resource not found').message;
     res.status(200).json({
       success: true,

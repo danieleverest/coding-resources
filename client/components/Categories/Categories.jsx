@@ -1,12 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 
-export default ({ categories }) => (
+const CategoryList = ({ categories }) => (
   <List>
     {categories.map(text => (
       <ListItem button key={text}>
-        <ListItemText primary={text} />
+        <Link to={`/resources/${text}`}>
+          <ListItemText primary={text} />
+        </Link>
       </ListItem>
     ))}
   </List>
 );
+
+CategoryList.propTypes = {
+  categories: PropTypes.array.isRequired,
+};
+
+export default CategoryList;

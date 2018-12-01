@@ -9,7 +9,6 @@ import {
   LinkListPage,
   SubmitLink,
   IndividualLink,
-  NoMatch,
 } from '..';
 
 const Main = ({ categories, setLogin }) => (
@@ -47,6 +46,7 @@ const Main = ({ categories, setLogin }) => (
         component={IndividualLink}
       />
       <Route
+        exact
         path="/resources/:cat"
         component={LinkListPage}
       />
