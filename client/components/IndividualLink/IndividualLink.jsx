@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Chip } from '@material-ui/core';
 import api from '../../api';
 
@@ -15,6 +16,8 @@ class ViewResource extends React.Component {
 
   render() {
     const { resource } = this.state;
+    const { id } = this.props.match.params;
+
     return resource ? (
       <div className="IndividualLink">
         <div className="container">
@@ -28,6 +31,9 @@ class ViewResource extends React.Component {
               >
                 {resource.link}
               </a>
+            </div>
+            <div>
+              <Link to={`/resources/edit/${id}`}>Edit</Link>
             </div>
             <div>
               {resource.tags.map(tag => (

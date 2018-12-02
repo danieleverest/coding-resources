@@ -1,5 +1,6 @@
 export { default as Footer } from './Footer/Footer';
 export { default as IndividualLink } from './IndividualLink/IndividualLink';
+export { default as EditResource } from './EditResource/EditResource';
 export { default as Intro } from './Intro/Intro';
 export { default as LinkListPage } from './LinkListPage/LinkListPage';
 export { default as Login } from './Login/Login';

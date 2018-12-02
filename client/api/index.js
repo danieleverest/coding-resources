@@ -120,6 +120,25 @@ const api = {
       return error.response.data;
     }
   },
+  /**
+   * Update a resource
+   * @private
+   * @param {object} resource
+   * @param {string} resource.name
+   * @param {string} resource.link
+   * @param {string} resource.category
+   * @param {string} [resource.desc]
+   * @param {array} [resource.tags]
+   * @returns {Promise}
+   */
+  updateResource: async (id, { name, link, category, tags, desc }) => {
+    try {
+      const res = await API.post(`/resources/edit/${id}`, { name, link, category, tags, desc });
+      return res.data;
+    } catch (error) {
+      return error.response;
+    }
+  },
 };
 
 export default api;

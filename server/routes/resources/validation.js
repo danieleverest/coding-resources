@@ -7,7 +7,7 @@ const isValidCategory = async (value) => {
     : Promise.reject();
 };
 
-const newResourceValidation = [
+const resourceValidation = [
   check('name')
     .trim()
     .escape()
@@ -26,5 +26,5 @@ const newResourceValidation = [
 ];
 
 module.exports = {
-  newResourceValidation,
+  resourceValidation,
 }

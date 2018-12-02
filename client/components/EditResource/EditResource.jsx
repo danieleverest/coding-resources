@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import api from '../../api';
 
-import './SubmitLink.scss';
+import './EditResource.scss';
 
 class SubmitLink extends Component {
   static propTypes = {
@@ -30,29 +30,43 @@ class SubmitLink extends Component {
     error: null,
   };
 
+  async componentDidMount() {
+    const { id } = this.props.match.params;
+    const res = await api.getOneResource(id);
+    if (res.success) {
+      const { link, name, category, desc, tags } = res.resource;
+      this.setState({ link, name, category, desc, tags });
+    } else {
+      this.setState({ error: 'Could not fetch' });
+    }
+  }
+
   handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value } );
   }
 
   submitLink = async (e) => {
     e.preventDefault();
     const { link, name, category, desc, tags } = this.state;
     const resource = { link, name, category, desc, tags };
-    const res = await api.submitResource(resource);
+    const { id } = this.props.match.params;
+    const res = await api.updateResource(id, resource);
     if (res.success) {
       const { history } = this.props;
-      history.push(`/resources/${res.resourceId}`);
+      history.push(`/resources/${id}`);
     } else {
-      this.setState({ error: 'Unable to submit' })
+      this.setState({ error: 'Could not update. Unauthorized.'})
     }
   }
 
   render() {
     const { categories, defaultTags } = this.props;
-    const { link, name, category, desc, tags } = this.state;
+    const { link, name, category, desc, tags, error } = this.state;
 
-    return (
+    return error
+      ? <div>{error}</div>
+      : (
       <>
         <form
           className="submission-form"
@@ -137,7 +151,7 @@ class SubmitLink extends Component {
           </Button>
         </form>
       </>
-    );
+      );
   }
 }
 

@@ -9,14 +9,28 @@ import {
   LinkListPage,
   SubmitLink,
   IndividualLink,
+  EditResource,
 } from '..';
+
+const defaultTags = [
+  'OOP',
+  'ES5',
+  'Sorts',
+  'Big O',
+  'Refactoring',
+  'Map',
+  'Learning to Code',
+  'Free Sites',
+  'Paid Sites',
+  'Getting Hired',
+];
 
 const Main = ({ categories, setLogin }) => (
   <div className="main-content">
     <Switch>
       <Route
         path="/login"
-        component={props => (
+        render={props => (
           <Login
             {...props}
             setLogin={setLogin}
@@ -25,33 +39,45 @@ const Main = ({ categories, setLogin }) => (
       />
       <Route
         path="/register"
-        component={Register}
+        render={props => <Register {...props} />}
       />
       <Route
         exact
         path="/resources"
-        component={LinkListPage}
+        render={LinkListPage}
       />
       <Route
         path="/link-submit"
-        component={props => (
+        render={props => (
           <SubmitLink
             {...props}
             categories={categories}
+            defaultTags={defaultTags}
+          />
+        )}
+      />
+      <Route
+        exact
+        path="/resources/edit/:id"
+        render={props => (
+          <EditResource
+            {...props}
+            categories={categories}
+            defaultTags={defaultTags}
           />
         )}
       />
       <Route
         exact
         path="/resources/:id"
-        component={IndividualLink}
+        render={props => <IndividualLink {...props} />}
       />
       <Route
         exact
         path="/resources/c/:cat"
-        component={LinkListPage}
+        render={props => <LinkListPage {...props} />}
       />
-      <Route path="/" component={Intro} />
+      <Route path="/" render={props => <Intro {...props} />} />
     </Switch>
   </div>
 );

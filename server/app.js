@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
 

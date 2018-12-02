@@ -10,15 +10,13 @@ const {
   deleteResource,
 } = require('./controller');
 
-const {
-  newResourceValidation,
-} = require('./validation');
+const { resourceValidation } = require('./validation');
 
 router.get('/categories', getCategories);
 router.get('/c/:category', getResources);
 router.get('/:id', getOneResource);
-router.post('/', loginRequired, newResourceValidation, newResource);
-router.put('/:id', loginRequired, editResource);
+router.post('/edit/:id', loginRequired, resourceValidation, editResource);
+router.post('/', loginRequired, resourceValidation, newResource);
 router.delete('/:id', loginRequired, deleteResource);
 
 module.exports = router;
