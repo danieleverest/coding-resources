@@ -7,7 +7,7 @@ const CategoryList = ({ categories }) => (
   <List>
     {categories.map(text => (
       <ListItem button key={text}>
-        <Link to={`/resources/${text}`}>
+        <Link to={`/resources/c/${text}`}>
           <ListItemText primary={text} />
         </Link>
       </ListItem>

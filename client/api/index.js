@@ -93,7 +93,10 @@ const api = {
   getOneResource: async (resourceId) => {
     try {
       const res = await API.get(`/resources/${resourceId}`);
-      return res.data.resource;
+      return {
+        success: true,
+        resource: res.data.resource,
+      };
     } catch (error) {
       return error.response.data;
     }
@@ -106,11 +109,12 @@ const api = {
    * @param {string} resource.link
    * @param {string} resource.category
    * @param {string} [resource.desc]
+   * @param {array} [resource.tags]
    * @returns {Promise}
    */
-  submitResource: async ({ name, link, category, desc = '' }) => {
+  submitResource: async ({ name, link, category, tags, desc = '' }) => {
     try {
-      const res = await API.post('/resources', { name, link, category, desc });
+      const res = await API.post('/resources', { name, link, category, desc, tags });
       return res.data;
     } catch (error) {
       return error.response.data;

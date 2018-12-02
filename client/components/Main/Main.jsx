@@ -42,12 +42,13 @@ const Main = ({ categories, setLogin }) => (
         )}
       />
       <Route
-        path="/link"
+        exact
+        path="/resources/:id"
         component={IndividualLink}
       />
       <Route
         exact
-        path="/resources/:cat"
+        path="/resources/c/:cat"
         component={LinkListPage}
       />
       <Route path="/" component={Intro} />

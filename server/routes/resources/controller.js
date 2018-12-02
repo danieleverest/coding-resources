@@ -53,7 +53,7 @@ const newResource = async (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length) res.status(422).json({ errors });
     else {
-      const { name, link, category, desc } = req.body;
+      const { name, link, category, desc, tags } = req.body;
       const submittedBy = req.user._id;
       const resource = new Resource({
         name,
@@ -61,6 +61,7 @@ const newResource = async (req, res) => {
         submittedBy,
         category,
         desc,
+        tags,
       });
       await resource.save();
       res.status(200).json({
