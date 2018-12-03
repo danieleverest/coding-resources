@@ -3,7 +3,7 @@ import { Register } from '../Auth';
 
 import api from '../../api';
 
-class RegisterHOC extends React.Component {
+class RegisterC extends React.Component {
   state = { errors: [] };
 
   register = ({ username, email, password, passwordConfirm }) => {
@@ -35,4 +35,4 @@ class RegisterHOC extends React.Component {
   }
 }
 
-export default RegisterHOC;
+export default RegisterC;

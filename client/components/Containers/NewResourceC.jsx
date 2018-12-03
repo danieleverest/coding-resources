@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ResourceForm } from '../Resources';
 import api from '../../api';
 
-class NewResourceHOC extends Component {
+class NewResourceC extends Component {
   static propTypes = {
     categories: PropTypes.array.isRequired,
     defaultTags: PropTypes.array.isRequired,
@@ -31,4 +31,4 @@ class NewResourceHOC extends Component {
   }
 }
 
-export default NewResourceHOC;
+export default NewResourceC;

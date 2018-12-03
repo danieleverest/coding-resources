@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ResourceForm } from '../Resources';
 import api from '../../api';
 
-class EditResourceHOC extends Component {
+class EditResourceC extends Component {
   static propTypes = {
     categories: PropTypes.array.isRequired,
     defaultTags: PropTypes.array.isRequired,
@@ -49,8 +49,15 @@ class EditResourceHOC extends Component {
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
-    return <ResourceForm resource={resource} categories={categories} defaultTags={defaultTags} submit={this.submit} />;
+    return (
+      <ResourceForm
+        resource={resource}
+        categories={categories}
+        defaultTags={defaultTags}
+        submit={this.submit}
+      />
+    );
   }
 }
 
-export default EditResourceHOC;
+export default EditResourceC;

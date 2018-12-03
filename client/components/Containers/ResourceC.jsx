@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import api from '../../api';
 import { Resource } from '../Resources';
 
-class ResourceHOC extends React.Component {
+class ResourceC extends React.Component {
   state = {
     loading: true,
     error: null,
@@ -36,6 +36,6 @@ class ResourceHOC extends React.Component {
   }
 }
 
-ResourceHOC.propTypes = { match: PropTypes.any };
+ResourceC.propTypes = { match: PropTypes.any };
 
-export default ResourceHOC;
+export default ResourceC;

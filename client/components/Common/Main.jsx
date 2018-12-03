@@ -5,11 +5,11 @@ import './Main.scss';
 import { Intro } from '.';
 import { Login } from '../Auth';
 import {
-  RegisterHOC,
-  ResourceHOC,
-  NewResourceHOC,
-  EditResourceHOC,
-  ResourceListHOC,
+  RegisterC,
+  ResourceC,
+  NewResourceC,
+  EditResourceC,
+  ResourceListC,
 } from '../Containers';
 
 const defaultTags = [
@@ -39,17 +39,17 @@ const Main = ({ categories, login }) => (
       />
       <Route
         path="/register"
-        component={RegisterHOC}
+        component={RegisterC}
       />
       <Route
         exact
         path="/resources"
-        component={ResourceListHOC}
+        component={ResourceListC}
       />
       <Route
         path="/submit-resource"
         render={props => (
-          <NewResourceHOC
+          <NewResourceC
             {...props}
             categories={categories}
             defaultTags={defaultTags}
@@ -60,7 +60,7 @@ const Main = ({ categories, login }) => (
         exact
         path="/resources/edit/:id"
         render={props => (
-          <EditResourceHOC
+          <EditResourceC
             {...props}
             categories={categories}
             defaultTags={defaultTags}
@@ -70,12 +70,12 @@ const Main = ({ categories, login }) => (
       <Route
         exact
         path="/resources/:id"
-        component={ResourceHOC}
+        component={ResourceC}
       />
       <Route
         exact
         path="/resources/c/:cat"
-        component={ResourceListHOC}
+        component={ResourceListC}
       />
       <Route path="/" component={Intro} />
     </Switch>
