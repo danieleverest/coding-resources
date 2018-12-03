@@ -13,10 +13,10 @@ import './Register.scss';
 
 class Register extends React.Component {
   state = {
-    username: 'rejam',
-    email: 'rejam@gmail.com',
-    password: '123456',
-    passwordConfirm: '123456',
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
   }
 
   handleSubmit = (e) => {
