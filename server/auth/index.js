@@ -7,8 +7,7 @@ exports.loginRequired = async (req, res, next) => {
     // get auth from header
     const { authorization } = req.headers;
     // get token from 'bearer <token>' format
-    const token = authorization.split(' ')[1];
-
+    const [_, token] = authorization.split(' ');
     // jwt checks to see if the token is valid: error or decoded payload
     jwt.verify(token, secret, (error, decode) => {
       if (error) throw new Error(error);

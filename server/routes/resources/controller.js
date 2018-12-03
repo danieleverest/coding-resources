@@ -8,7 +8,7 @@ const getCategories = async (req, res) => res.status(200).json({ categories });
 const getResources = async (req, res) => {
   const { category } = req.params;
   try {
-    const resources = (category === 'all')
+    const resources = category === 'all'
       ? await Resource.find()
       : await Resource.find({ category });
     res.status(200).json({
@@ -25,15 +25,13 @@ const getResources = async (req, res) => {
 
 const getOneResource = async (req, res) => {
   try {
-    const resource = await Resource
-      .findById(req.params.id)
-      .populate({
-        path: 'comments',
-        select: {
-          path: 'author',
-          select: 'name',
-        },
-      });
+    const resource = await Resource.findById(req.params.id).populate({
+      path: 'comments',
+      select: {
+        path: 'author',
+        select: 'name',
+      },
+    });
     // .populate('submittedBy');
     if (!resource) throw new Error('Resource not found').message;
     res.status(200).json({
@@ -80,24 +78,28 @@ const newResource = async (req, res) => {
 
 const editResource = async (req, res) => {
   try {
-    const resource = await Resource.findById(req.params.id);
+    const errors = validationResult(req).array();
+    if (errors.length) res.status(422).json({ errors });
+    else {
+      const resource = await Resource.findById(req.params.id);
+      if (!resource) throw new Error('Resource not found');
 
-    if (!resource) throw new Error('Resource not found').message;
-    if (!resource.submittedBy.equals(req.user._id)) throw new Error('You cannot edit resources you did not submit').message;
+      if (!resource.submittedBy.equals(req.user._id)) throw new Error('Not authorized');
 
-    const { update } = req.body;
-    Object.assign(resource, update);
-    await resource.save();
+      const { name, link, category, tags, desc } = req.body;
+      resource.set({ name, link, category, tags, desc });
+      await resource.save();
 
-    res.status(200).json({
-      success: true,
-      message: 'Resource updated',
-      resource,
-    });
+      res.status(200).json({
+        success: true,
+        message: 'Resource updated',
+        resource,
+      });
+    }
   } catch (error) {
     res.status(400).json({
       success: false,
-      error,
+      error: error.message,
     });
   }
 };

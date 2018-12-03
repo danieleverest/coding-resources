@@ -5,10 +5,13 @@ const User = require('../../models/user');
 async function register(req, res) {
   try {
     const errors = validationResult(req).array();
-    if (errors.length) res.status(422).json({ errors });
-    else {
+    if (errors.length) {
+      const msgs = errors.reduce((arr, err) => {
+        return [...arr, err.msg];
+      }, []);
+      res.status(422).json(msgs);
+    } else {
       const { username, email, password } = req.body;
-      // input validated pre-save by User model and password hashed
       await User.create({
         username,
         email,

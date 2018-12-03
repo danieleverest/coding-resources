@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { Button, Chip } from '@material-ui/core';
 import { ThumbUp } from '@material-ui/icons';
 
-import './Links.scss';
+import './Resource.scss';
 
-const link = ({ id, url, title, tags, votes }) => (
+const ResourceListItem = ({ id, url, title, tags, votes }) => (
   <>
     <h3>
       <Link to={`/resources/${id}`}>{title}</Link>
@@ -32,7 +32,7 @@ const link = ({ id, url, title, tags, votes }) => (
   </>
 );
 
-link.propTypes = {
+ResourceListItem.propTypes = {
   id: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -40,4 +40,4 @@ link.propTypes = {
   votes: PropTypes.number,
 };
 
-export default link;
+export default ResourceListItem;
