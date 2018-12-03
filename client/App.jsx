@@ -1,13 +1,13 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
-import { NavBar, Main, Categories } from './components';
+import { NavBar, Main, CategoryList } from './components/Common';
 import api from './api';
 import './App.scss';
 
 class App extends React.Component {
   state = {
     categories: [],
-    isLoggedIn: false,
+    isLoggedIn: this.props.loggedIn,
   };
 
   async componentDidMount() {
@@ -15,9 +15,14 @@ class App extends React.Component {
     this.setState({ categories });
   }
 
-  setLogin = () => this.setState({ isLoggedIn: true });
+  login = () => {
+    this.setState({ isLoggedIn: true });
+  }
 
-  setLogout = () => this.setState({ isLoggedIn: false });
+  logout = () => {
+    api.logout();
+    this.setState({ isLoggedIn: false });
+  }
 
   render() {
     const { categories, isLoggedIn } = this.state;
@@ -26,17 +31,17 @@ class App extends React.Component {
       <>
         <NavBar
           isLoggedIn={isLoggedIn}
-          setLogout={this.setLogout}
+          logout={this.logout}
         />
         <Sidebar
-          sidebar={<Categories categories={categories} />}
           open
           docked
           rootClassName="sidebarRoot"
+          sidebar={<CategoryList categories={categories} />}
         >
           <Main
             categories={categories}
-            setLogin={this.setLogin}
+            login={this.login}
           />
         </Sidebar>
       </>

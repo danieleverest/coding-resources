@@ -2,20 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import {
-  Checkbox,
   Avatar,
   TextField,
   Button,
   Typography,
-  FormControlLabel,
   Divider,
 } from '@material-ui/core';
 import api from '../../api';
 import './Login.scss';
 
-const Login = ({ setLogin, history }) => {
+const Login = ({ login, history }) => {
 
-  const login = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const {
@@ -25,38 +23,38 @@ const Login = ({ setLogin, history }) => {
     const credentials = { username, password };
     const success = await api.login(credentials);
     if (success) {
-      setLogin();
+      login();
       history.push('/');
     }
   };
 
+  const config = {
+    className: 'form-row',
+    margin: 'normal',
+    variant: 'outlined',
+  };
   return (
   <>
     <Avatar>
       <LockIcon />
     </Avatar>
-    <form onSubmit={login}>
+    <form onSubmit={handleSubmit}>
       <div>
         <TextField
-          id="username"
           label="username"
-          className="form-row"
           type="text"
           name="username"
           autoComplete="username"
-          margin="normal"
-          variant="outlined"
+          {...config}
         />
       </div>
       <div>
         <TextField
-          id="password"
           label="Password"
-          className="form-row"
           type="password"
+          name="password"
           autoComplete="password"
-          margin="normal"
-          variant="outlined"
+          {...config}
         />
       </div>
       <div>
@@ -68,13 +66,6 @@ const Login = ({ setLogin, history }) => {
           Log In
         </Button>
       </div>
-    </form>
-
-    <form>
-      <FormControlLabel
-        control={<Checkbox value="remember" color="primary" />}
-        label="Remember me"
-      />
     </form>
 
     <Divider className="form-spacer" />

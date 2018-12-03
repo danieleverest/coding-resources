@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router-dom';
 import './Main.scss';
+import { Intro } from '.';
+import { Login } from '../Auth';
 import {
-  Intro,
-  Login,
-  Register,
-  LinkListPage,
-  SubmitLink,
-  IndividualLink,
-  EditResource,
-} from '..';
+  RegisterHOC,
+  ResourceHOC,
+  NewResourceHOC,
+  EditResourceHOC,
+  ResourceListHOC,
+} from '../Containers';
 
 const defaultTags = [
   'OOP',
@@ -25,7 +25,7 @@ const defaultTags = [
   'Getting Hired',
 ];
 
-const Main = ({ categories, setLogin }) => (
+const Main = ({ categories, login }) => (
   <div className="main-content">
     <Switch>
       <Route
@@ -33,23 +33,23 @@ const Main = ({ categories, setLogin }) => (
         render={props => (
           <Login
             {...props}
-            setLogin={setLogin}
+            login={login}
           />
         )}
       />
       <Route
         path="/register"
-        render={props => <Register {...props} />}
+        component={RegisterHOC}
       />
       <Route
         exact
         path="/resources"
-        render={LinkListPage}
+        component={ResourceListHOC}
       />
       <Route
-        path="/link-submit"
+        path="/submit-resource"
         render={props => (
-          <SubmitLink
+          <NewResourceHOC
             {...props}
             categories={categories}
             defaultTags={defaultTags}
@@ -60,7 +60,7 @@ const Main = ({ categories, setLogin }) => (
         exact
         path="/resources/edit/:id"
         render={props => (
-          <EditResource
+          <EditResourceHOC
             {...props}
             categories={categories}
             defaultTags={defaultTags}
@@ -70,14 +70,14 @@ const Main = ({ categories, setLogin }) => (
       <Route
         exact
         path="/resources/:id"
-        render={props => <IndividualLink {...props} />}
+        component={ResourceHOC}
       />
       <Route
         exact
         path="/resources/c/:cat"
-        render={props => <LinkListPage {...props} />}
+        component={ResourceListHOC}
       />
-      <Route path="/" render={props => <Intro {...props} />} />
+      <Route path="/" component={Intro} />
     </Switch>
   </div>
 );
